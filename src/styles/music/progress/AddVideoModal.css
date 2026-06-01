@@ -1,0 +1,396 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background:
+    rgba(0,0,0,0.78);
+
+  backdrop-filter: blur(12px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 4000;
+}
+
+.modal-content {
+  width: 560px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20,24,40,0.96),
+      rgba(12,15,28,0.96)
+    );
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 34px;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 8px;
+}
+
+.modal-header h2 {
+  font-size: 34px;
+
+  font-weight: 700;
+}
+
+.modal-header button {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 16px;
+
+  border: none;
+
+  background:
+    rgba(255,255,255,0.06);
+
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.modal-header button:hover {
+  background:
+    rgba(255,255,255,0.12);
+}
+
+.modal-content input,
+.modal-content textarea {
+  background:
+    rgba(255,255,255,0.05);
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  color: white;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border-color:
+    rgba(120,110,255,0.5);
+}
+
+.modal-content textarea {
+  min-height: 130px;
+
+  resize: none;
+
+  line-height: 1.6;
+}
+
+/* SONG SEARCH */
+
+.song-search-wrapper {
+  position: relative;
+}
+
+.song-results {
+  position: absolute;
+
+  top: calc(100% + 10px);
+
+  left: 0;
+  right: 0;
+
+  background:
+    #161b2d;
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  z-index: 20;
+
+  backdrop-filter: blur(10px);
+}
+
+.song-result {
+  width: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  padding: 14px 18px;
+
+  text-align: left;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: 0.18s;
+}
+
+.song-result:hover {
+  background:
+    rgba(255,255,255,0.06);
+}
+
+.add-new-song {
+  color: #7c6cff;
+
+  border-top:
+    1px solid rgba(255,255,255,0.05);
+}
+
+/* DESCRIPTION */
+
+.add-description-btn {
+  height: 52px;
+
+  border-radius: 18px;
+
+  border:
+    1px dashed rgba(255,255,255,0.12);
+
+  background:
+    rgba(255,255,255,0.03);
+
+  color: #c9d0e2;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.add-description-btn:hover {
+  background:
+    rgba(255,255,255,0.06);
+}
+
+/* VIDEO */
+
+.video-upload-box {
+  height: 120px;
+
+  border-radius: 24px;
+
+  border:
+    2px dashed rgba(120,110,255,0.25);
+
+  background:
+    rgba(255,255,255,0.03);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  position: relative;
+
+  transition: 0.25s;
+}
+
+.video-upload-box:hover {
+  border-color:
+    rgba(120,110,255,0.5);
+
+  background:
+    rgba(255,255,255,0.05);
+}
+
+.video-upload-box input {
+  display: none;
+}
+
+.video-upload-box div {
+  color: #cfd5e6;
+
+  font-size: 16px;
+
+  text-align: center;
+
+  padding: 0 20px;
+}
+
+/* SAVE */
+
+.save-btn {
+  height: 58px;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6d63ff,
+      #524bff
+    );
+
+  color: white;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  margin-top: 8px;
+
+  transition: 0.22s;
+
+  box-shadow:
+    0 18px 40px rgba(82,75,255,0.35);
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 24px 50px rgba(82,75,255,0.45);
+}
+
+.custom-datepicker {
+  width: 100%;
+
+  background:
+    rgba(255,255,255,0.05);
+
+  border:
+    1px solid rgba(120,110,255,0.25);
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  color: white;
+
+  font-size: 17px;
+
+  outline: none;
+
+  transition: 0.25s;
+}
+
+.custom-datepicker:focus {
+  border-color:
+    rgba(120,110,255,0.6);
+
+  box-shadow:
+    0 0 0 4px rgba(120,110,255,0.12);
+}
+
+/* CALENDAR */
+
+.react-datepicker {
+  background:
+    #161b2d !important;
+
+  border:
+    1px solid rgba(255,255,255,0.08) !important;
+
+  border-radius: 24px !important;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.45);
+}
+
+.react-datepicker__header {
+  background:
+    #1d2338 !important;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.06) !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: white !important;
+
+  font-weight: 600;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  color: #d7dcef !important;
+}
+
+.react-datepicker__day:hover {
+  background:
+    rgba(120,110,255,0.2) !important;
+
+  border-radius: 10px;
+}
+
+.react-datepicker__day--selected {
+  background:
+    #6d63ff !important;
+
+  border-radius: 10px !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color:
+    white !important;
+}
+
+.detected-date-box {
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(90,84,255,0.12);
+
+  border:
+    1px solid rgba(120,110,255,0.25);
+
+  color: #dfe4ff;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+.detected-date-box strong {
+  color: white;
+}

@@ -1,0 +1,235 @@
+.song-timeline-page {
+  margin-top: 18px;
+}
+
+/* -------------------- */
+/* BACK */
+/* -------------------- */
+
+.back-button {
+  height: 42px;
+
+  padding: 0 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.02)
+    );
+
+  color: white;
+
+  cursor: pointer;
+
+  margin-bottom: 28px;
+
+  transition: 0.25s;
+
+  backdrop-filter: blur(10px);
+}
+
+.back-button:hover {
+  background:
+    rgba(120,90,255,0.12);
+
+  border-color:
+    rgba(120,90,255,0.16);
+
+  box-shadow:
+    0 0 24px rgba(120,90,255,0.16);
+}
+
+/* -------------------- */
+/* HEADER */
+/* -------------------- */
+
+.song-timeline-header {
+  margin-bottom: 20px;
+}
+
+.song-timeline-header h1 {
+  font-size: 68px;
+
+  line-height: 0.9;
+
+  letter-spacing: -4px;
+
+  margin: 0 0 12px 0;
+
+  color: white;
+}
+
+.song-timeline-header span {
+  display: block;
+
+  color: rgba(255,255,255,0.55);
+
+  font-size: 16px;
+
+  margin-top: 0;
+}
+
+/* -------------------- */
+/* VIDEO GRID */
+/* -------------------- */
+
+.videos-grid {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  align-items: flex-start;
+}
+
+/* -------------------- */
+/* MUCH SMALLER CARDS */
+/* -------------------- */
+
+.videos-grid .timeline-card.landscape {
+  width: 180px !important;
+}
+
+.videos-grid .timeline-card.portrait {
+  width: 140px !important;
+}
+
+/* height vibe like SongFolders */
+
+.videos-grid .timeline-card {
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+
+  box-shadow:
+    0 12px 26px rgba(0,0,0,0.26);
+}
+
+.videos-grid .timeline-card:hover {
+  transform:
+    translateY(-3px)
+    scale(1.015);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.36);
+}
+
+/* -------------------- */
+/* IMAGE */
+/* -------------------- */
+
+.videos-grid .timeline-card img {
+  display: block;
+}
+
+/* landscape */
+
+.videos-grid .timeline-card.landscape img {
+  aspect-ratio: 16/9;
+
+  object-fit: cover;
+}
+
+/* portrait */
+
+.videos-grid .timeline-card.portrait img {
+  aspect-ratio: 9/16;
+
+  object-fit: cover;
+}
+
+/* -------------------- */
+/* OVERLAY */
+/* -------------------- */
+
+.videos-grid .timeline-overlay {
+  padding: 12px;
+
+  justify-content: space-between;
+}
+
+/* smaller play */
+
+.videos-grid .play-icon {
+  width: 52px;
+  height: 52px;
+
+  font-size: 20px;
+
+  align-self: center;
+}
+
+/* -------------------- */
+/* TEXT */
+/* -------------------- */
+
+.videos-grid .video-info {
+  gap: 8px;
+}
+
+.videos-grid .video-date {
+  font-size: 11px;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+}
+
+.videos-grid .video-description {
+  font-size: 12px;
+
+  line-height: 1.35;
+
+  max-width: 100%;
+}
+
+/* -------------------- */
+/* MONTH SPACING */
+/* -------------------- */
+
+.song-timeline-page .timeline-wrapper {
+  gap: 16px;
+}
+
+.song-timeline-page .month-content.open {
+  padding-top: 18px;
+}
+
+/* make month cards tighter */
+
+.song-timeline-page .month-group {
+  padding-bottom: 18px;
+}
+
+/* -------------------- */
+/* MOBILE */
+/* -------------------- */
+
+@media (max-width: 768px) {
+  .song-timeline-header h1 {
+    font-size: 44px;
+  }
+
+  .videos-grid {
+    gap: 12px;
+  }
+
+  .videos-grid .timeline-card.landscape {
+    width: 150px !important;
+  }
+
+  .videos-grid .timeline-card.portrait {
+    width: 115px !important;
+  }
+}

@@ -1,0 +1,64 @@
+.content {
+  position: relative;
+
+  padding:
+    90px 80px 120px;
+
+  margin-top: 30px;
+}
+.content::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255,220,190,0.12),
+      transparent 45%
+    );
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+.sectionHeader {
+  position: relative;
+
+  z-index: 2;
+
+  margin-bottom: 42px;
+}
+.sectionHeader span {
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  color: #9a8f84;
+}
+.sectionHeader h2 {
+  margin-top: 8px;
+
+  font-size: 42px;
+
+  font-weight: 600;
+
+  letter-spacing: -1px;
+
+  color: #2f2a25;
+}
+.posts {
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 34px;
+}

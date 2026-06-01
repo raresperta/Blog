@@ -1,0 +1,148 @@
+.songs-view-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(190px, 1fr));
+
+  gap: 34px;
+
+  margin-top: 24px;
+}
+
+/* -------------------- */
+/* CARD */
+/* -------------------- */
+
+.song-select-card {
+  cursor: pointer;
+
+  transition: 0.24s ease;
+
+  position: relative;
+}
+
+.song-select-card:hover {
+  transform:
+    translateY(-4px);
+}
+
+/* -------------------- */
+/* STACK */
+/* -------------------- */
+
+.song-select-stack {
+  position: relative;
+
+  height: 150px;
+
+  margin-bottom: 16px;
+
+  border-radius: 24px;
+
+  overflow: visible;
+}
+
+/* -------------------- */
+/* IMAGES */
+/* -------------------- */
+
+.song-select-img {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 24px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.34);
+
+  transition: 0.3s ease;
+
+  background: #0f1117;
+}
+
+/* BACK */
+
+.song-select-img.back-1 {
+  transform:
+    rotate(-7deg)
+    translateX(-12px)
+    translateY(8px)
+    scale(0.97);
+
+  opacity: 0.58;
+
+  z-index: 1;
+}
+
+.song-select-img.back-2 {
+  transform:
+    rotate(6deg)
+    translateX(12px)
+    translateY(6px)
+    scale(0.985);
+
+  opacity: 0.82;
+
+  z-index: 2;
+}
+
+/* FRONT */
+
+.song-select-img.front {
+  z-index: 3;
+
+  transform: rotate(-1deg);
+}
+
+/* HOVER */
+
+.song-select-card:hover .back-1 {
+  transform:
+    rotate(-5deg)
+    translateX(-7px)
+    translateY(5px)
+    scale(0.98);
+}
+
+.song-select-card:hover .back-2 {
+  transform:
+    rotate(4deg)
+    translateX(7px)
+    translateY(4px)
+    scale(0.99);
+}
+
+/* -------------------- */
+/* INFO */
+/* -------------------- */
+
+.song-select-info {
+  padding-left: 4px;
+}
+
+.song-select-info h2 {
+  margin: 0;
+
+  font-size: 22px;
+
+  line-height: 1.15;
+
+  color: white;
+
+  font-weight: 700;
+}
+
+.song-select-info p {
+  margin-top: 6px;
+
+  color: rgba(255,255,255,0.55);
+
+  font-size: 14px;
+}

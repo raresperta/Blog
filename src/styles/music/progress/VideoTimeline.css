@@ -1,0 +1,301 @@
+.timeline-wrapper {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: -10px;
+}
+
+/* -------------------- */
+/* MONTH GROUP */
+/* -------------------- */
+
+.month-group {
+  position: relative;
+
+  isolation: isolate;
+
+  overflow: hidden;
+
+  border-radius: 34px;
+
+  padding: 18px 18px 20px;
+
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(70, 90, 255, 0.1),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom center,
+      rgba(140, 70, 255, 0.1),
+      transparent 55%
+    ),
+    linear-gradient(180deg, rgba(3, 5, 14, 0.98), rgba(2, 4, 12, 1));
+
+  border: 1px solid rgba(120, 110, 255, 0.06);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 0 80px rgba(60, 80, 255, 0.08),
+    0 0 140px rgba(140, 70, 255, 0.05),
+    inset 0 -80px 120px rgba(90, 50, 255, 0.08);
+
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+  transform: translateZ(0);
+  backdrop-filter: blur(1px);
+}
+
+/* -------------------- */
+/* AMBIENT LIGHT */
+/* -------------------- */
+
+.month-group::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 18% 22%,
+      rgba(120, 70, 255, 0.1),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 72% 38%,
+      rgba(70, 90, 255, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 48% 82%,
+      rgba(170, 80, 255, 0.1),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 92% 18%,
+      rgba(100, 120, 255, 0.06),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 8% 92%,
+      rgba(120, 60, 255, 0.08),
+      transparent 20%
+    );
+
+  filter: blur(4px);
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  opacity: 0.3;
+
+  animation:
+    waveMove 14s ease-in-out infinite,
+    waveBreath 6s ease-in-out infinite;
+}
+
+/* -------------------- */
+/* WAVES */
+/* -------------------- */
+
+.month-group::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image: url("/waves.svg");
+
+  background-size: 140%;
+
+  background-position: center bottom;
+
+  background-repeat: no-repeat;
+
+  opacity: 0.5;
+
+  filter: blur(1px);
+
+  mix-blend-mode: screen;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  nimation:
+    waveMove 22s linear infinite,
+    waveBreath 9s ease-in-out infinite;
+}
+
+/* -------------------- */
+/* HOVER */
+/* -------------------- */
+
+.month-group:hover {
+  border-color: rgba(140, 120, 255, 0.1);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 100px rgba(90, 90, 255, 0.1),
+    0 0 180px rgba(140, 70, 255, 0.07),
+    inset 0 -80px 120px rgba(90, 50, 255, 0.1);
+}
+
+/* -------------------- */
+/* HEADER */
+/* -------------------- */
+
+.month-header {
+  width: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  min-height: 48px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+/* -------------------- */
+/* TITLE */
+/* -------------------- */
+
+.month-header h2 {
+  margin: 0;
+
+  font-size: 24px;
+
+  font-weight: 800;
+
+  letter-spacing: -1px;
+
+  color: white;
+
+  text-shadow: 0 0 24px rgba(120, 90, 255, 0.16);
+
+}
+
+/* REMOVE SUBTITLE */
+
+.month-header span {
+  display: none;
+}
+
+/* -------------------- */
+/* ARROW */
+/* -------------------- */
+
+.month-group.collapsed .month-header::after {
+  transform: rotate(180deg);
+}
+
+.month-group:hover .month-header::after {
+  background: rgba(120, 100, 255, 0.08);
+
+  border-color: rgba(120, 100, 255, 0.12);
+
+  box-shadow: 0 0 22px rgba(120, 100, 255, 0.14);
+}
+
+/* -------------------- */
+/* CONTENT */
+/* -------------------- */
+
+.month-content {
+  overflow: hidden;
+
+  opacity: 0;
+
+  transform: translateY(-8px);
+
+  max-height: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.28s ease,
+    transform 0.32s ease,
+    max-height 0.42s ease;
+}
+
+.month-content.open {
+  opacity: 1;
+
+  transform: translateY(-20px);
+
+  max-height: 4000px;
+
+  pointer-events: auto;
+
+  padding-top: 40px;
+
+  position: relative;
+
+  z-index: 2;
+}
+@keyframes waveFloat {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+
+  50% {
+    transform: translateX(-12px) translateY(-4px);
+  }
+
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+@keyframes waveMove {
+  0% {
+    transform: translateX(0px);
+  }
+
+  50% {
+    transform: translateX(-60px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes waveBreath {
+  0% {
+    margin-bottom: 0px;
+    opacity: 0.75;
+  }
+
+  50% {
+    margin-bottom: 8px;
+    opacity: 1;
+  }
+
+  100% {
+    margin-bottom: 0px;
+    opacity: 0.75;
+  }
+}

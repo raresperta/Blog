@@ -1,0 +1,223 @@
+.folders-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+
+  gap: 30px;
+
+  row-gap: 24px;
+
+  align-items: start;
+}
+
+/* -------------------- */
+/* CARD */
+/* -------------------- */
+
+.song-folder {
+  position: relative;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.28s ease,
+    filter 0.28s ease;
+}
+
+.song-folder:hover {
+  transform: translateY(-4px);
+}
+
+/* -------------------- */
+/* STACK */
+/* -------------------- */
+
+.folder-stack {
+  position: relative;
+
+  height: 160px;
+
+  margin-bottom: 16px;
+
+  border-radius: 28px;
+
+  overflow: visible;
+}
+
+/* -------------------- */
+/* IMAGES */
+/* -------------------- */
+
+.stack-img {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  background: #0f1117;
+
+  transition:
+    transform 0.34s ease,
+    opacity 0.34s ease,
+    filter 0.34s ease;
+
+  box-shadow: 0 0 40px rgba(109, 99, 255, 0.08);
+
+  backface-visibility: hidden;
+}
+
+/* BACK */
+
+.back-1 {
+  z-index: 1;
+
+  opacity: 0.22;
+
+  filter: blur(0.5px) brightness(0.72);
+
+  transform: rotate(-5deg) translateX(-10px) translateY(10px) scale(0.96);
+}
+
+.back-2 {
+  z-index: 2;
+
+  opacity: 0.38;
+
+  filter: brightness(0.82);
+
+  transform: rotate(4deg) translateX(10px) translateY(7px) scale(0.985);
+}
+
+/* FRONT */
+
+.front {
+  z-index: 3;
+
+  transform: rotate(-1deg);
+
+  box-shadow: 0 0 55px rgba(90, 84, 255, 0.12);
+}
+
+/* -------------------- */
+/* HOVER */
+/* -------------------- */
+
+.song-folder:hover .front {
+  transform: translateY(-2px) scale(1.01);
+
+  box-shadow: 0 0 65px rgba(120, 100, 255, 0.2);
+}
+
+.song-folder:hover .back-1 {
+  opacity: 0.3;
+
+  transform: rotate(-4deg) translateX(-6px) translateY(7px) scale(0.97);
+}
+
+.song-folder:hover .back-2 {
+  opacity: 0.5;
+
+  transform: rotate(3deg) translateX(6px) translateY(5px) scale(0.99);
+}
+
+/* -------------------- */
+/* PURPLE GLOW */
+/* -------------------- */
+
+.song-folder::after {
+  content: "";
+
+  position: absolute;
+
+  left: 12%;
+  right: 12%;
+  bottom: 72px;
+
+  height: 34px;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(140, 90, 255, 0.22),
+    transparent 70%
+  );
+
+  filter: blur(18px);
+
+  opacity: 0;
+
+  transition: 0.32s ease;
+
+  pointer-events: none;
+}
+
+.song-folder:hover::after {
+  opacity: 1;
+}
+
+/* -------------------- */
+/* INFO */
+/* -------------------- */
+
+.folder-info {
+  position: relative;
+
+  z-index: 5;
+
+  margin-top: 22px;
+
+  padding-left: 2px;
+}
+
+.folder-info h2 {
+  font-size: 18px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.6px;
+
+  margin: 0 0 4px;
+
+  color: white;
+
+  transition: 0.24s ease;
+}
+
+.song-folder:hover .folder-info h2 {
+  color: #c9bcff;
+}
+
+.folder-info p {
+  margin: 0;
+
+  color: #8f96ad;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+/* -------------------- */
+/* MOBILE */
+/* -------------------- */
+
+@media (max-width: 768px) {
+  .folders-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
+    gap: 22px;
+  }
+
+  .folder-stack {
+    height: 138px;
+  }
+
+  .folder-info h2 {
+    font-size: 16px;
+  }
+}

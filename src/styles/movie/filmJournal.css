@@ -1,0 +1,256 @@
+/* =========================
+   FILM JOURNAL PAGE
+========================= */
+
+.film-journal-page {
+  min-height: 100vh;
+
+  background: #0c0b0a;
+  color: #d6b08a;
+
+  font-family: "Inter", sans-serif;
+
+  overflow-x: hidden;
+
+  position: relative;
+}
+
+.film-journal-page *,
+.film-journal-page *::before,
+.film-journal-page *::after {
+  box-sizing: border-box;
+}
+
+.film-journal-page::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255, 120, 40, 0.08),
+      transparent 45%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.18),
+      rgba(0,0,0,0.58)
+    );
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+/* =========================
+   GRAIN
+========================= */
+
+.fj-grain {
+  position: fixed;
+  inset: 0;
+
+  background-image:
+    url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+  opacity: 0.07;
+
+  mix-blend-mode: soft-light;
+
+  pointer-events: none;
+
+  z-index: 999;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.fj-right-column {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  transform: translateY(-35%);
+}
+.fj-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.fj-main-content {
+  margin-left: 125px;
+
+  width: calc(100% - 125px);
+
+  padding: 14px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.fj-content-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-top: 18px;
+
+  align-items: start;
+}
+
+
+/* =========================
+   CARD BASE
+========================= */
+
+.fj-card {
+  display: inline-block;
+  position: relative;
+
+  border: 1px solid rgba(255, 180, 120, 0.08);
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(20,14,10,0.72),
+      rgba(9,8,8,0.88)
+    );
+
+  backdrop-filter: blur(12px);
+
+  padding: 18px;
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.015),
+    0 10px 40px rgba(0,0,0,0.28);
+
+  transition: 0.35s ease;
+}
+
+.fj-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.02),
+      transparent 30%
+    );
+
+  pointer-events: none;
+}
+
+.fj-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255,180,120,0.14);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.02),
+    0 20px 60px rgba(0,0,0,0.42);
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.fj-section-title {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.fj-section-title h3 {
+  font-family: "Oswald", sans-serif;
+
+  font-size: 24px;
+  font-weight: 400;
+
+  letter-spacing: 2px;
+
+  color: #ecb57e;
+}
+
+.fj-section-title span {
+  color: #8f6a4b;
+
+  font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1400px) {
+
+  .fj-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fj-projects {
+    grid-column: auto;
+  }
+
+  .fj-frame-layout {
+    flex-direction: column;
+  }
+
+  .fj-main-frame {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .fj-sidebar {
+    display: none;
+  }
+
+  .fj-main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .fj-hero-content {
+    flex-direction: column;
+
+    gap: 30px;
+
+    padding: 40px 24px;
+  }
+
+  .fj-hero-left h1 {
+    font-size: 58px;
+  }
+
+  .fj-subtitle {
+    font-size: 20px;
+  }
+
+  .fj-status {
+    font-size: 32px;
+  }
+
+  .fj-peek-grid,
+  .fj-project-grid,
+  .fj-visual-grid,
+  .fj-ideas {
+    grid-template-columns: 1fr;
+  }
+}

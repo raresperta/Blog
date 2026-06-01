@@ -1,0 +1,46 @@
+.fj-frames {
+  grid-row: span 2;
+}
+.fj-frame-layout {
+  display: flex;
+
+  gap: 24px;
+}
+.fj-main-frame {
+  width: 78%;
+  height: 280px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  filter:
+    brightness(0.78)
+    sepia(0.18)
+    contrast(1.05);
+}
+
+.fj-frame-details {
+  display: flex;
+  flex-direction: column;
+
+  gap: 28px;
+}
+
+.fj-detail span {
+  color: #7f5d41;
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+}
+
+.fj-detail p {
+  margin-top: 10px;
+
+  color: #ddb083;
+
+  font-size: 22px;
+
+  line-height: 1.5;
+}

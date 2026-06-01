@@ -1,0 +1,84 @@
+.fj-sidebar {
+  width: 125px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  padding: 26px 24px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-right: 1px solid rgba(255, 180, 120, 0.08);
+
+  background: rgba(10,10,10,0.78);
+
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    20px 0 60px rgba(0,0,0,0.35);
+
+  z-index: 100;
+}
+
+.fj-logo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  color: #d9a874;
+
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.fj-menu {
+  display: flex;
+  flex-direction: column;
+
+  gap: 28px;
+
+  margin-top: 50px;
+}
+
+.fj-menu a {
+  color: #926847;
+
+  text-decoration: none;
+
+  font-size: 11px;
+  letter-spacing: 2px;
+
+  line-height: 1.4;
+
+  transition: 0.3s ease;
+
+  cursor: pointer;
+
+  word-break: break-word;
+}
+
+.fj-menu a:hover,
+.fj-menu .active {
+  color: #ecb57e;
+}
+
+.fj-sidebar-footer {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+
+.fj-icons {
+  display: flex;
+  gap: 18px;
+
+  color: #9b704a;
+}

@@ -1,0 +1,227 @@
+.timeline-card {
+  position: relative;
+
+  border-radius: 26px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition: 0.28s ease;
+
+  background: black;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  isolation: isolate;
+}
+
+.timeline-card:hover {
+  transform: translateY(-4px) scale(1.01);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.42),
+    0 0 40px rgba(120, 90, 255, 0.14);
+}
+
+/* -------------------- */
+/* IMAGE */
+/* -------------------- */
+
+.timeline-card img {
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.timeline-card:hover img {
+  transform: scale(1.04);
+
+  filter: brightness(0.55) saturate(0.9) blur(1px);
+}
+
+/* -------------------- */
+/* LANDSCAPE */
+/* -------------------- */
+
+.timeline-card.landscape {
+  width: 340px;
+}
+
+.timeline-card.landscape img {
+  width: 100%;
+
+  aspect-ratio: 16/9;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+/* -------------------- */
+/* PORTRAIT */
+/* -------------------- */
+
+.timeline-card.portrait {
+  width: 220px;
+}
+
+.timeline-card.portrait img {
+  width: 100%;
+
+  aspect-ratio: 9/16;
+
+  object-fit: contain;
+
+  background: black;
+
+  display: block;
+}
+
+/* -------------------- */
+/* OVERLAY */
+/* -------------------- */
+
+.timeline-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 18px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+
+  opacity: 0;
+
+  transition: 0.28s ease;
+}
+
+.timeline-card:hover .timeline-overlay {
+  opacity: 1;
+}
+
+/* -------------------- */
+/* VIDEO INFO */
+/* -------------------- */
+
+.video-info {
+  transform: translateY(10px);
+
+  opacity: 0;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+  max-width: 92%;
+}
+
+.timeline-card:hover .video-info {
+  transform: translateY(0);
+
+  opacity: 1;
+}
+
+.video-date {
+  display: inline-block;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  margin-bottom: 12px;
+
+  box-shadow: 0 0 18px rgba(120, 90, 255, 0.12);
+}
+
+.video-description {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  font-weight: 500;
+
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 4;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+/* -------------------- */
+/* PLAY BUTTON */
+/* -------------------- */
+
+.play-icon {
+  width: 72px;
+  height: 72px;
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.42);
+
+  backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+
+  font-size: 28px;
+
+  align-self: center;
+
+  margin-bottom: 8px;
+
+  transform: scale(0.88);
+
+  opacity: 0;
+
+  transition:
+    transform 0.28s ease,
+    opacity 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.timeline-card:hover .play-icon {
+  transform: scale(1);
+
+  opacity: 1;
+
+  box-shadow: 0 0 28px rgba(140, 90, 255, 0.22);
+}

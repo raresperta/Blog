@@ -1,0 +1,177 @@
+.folder-viewer-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.82);
+
+  backdrop-filter: blur(16px);
+
+  z-index: 3000;
+
+  overflow-y: auto;
+
+  padding: 40px;
+}
+
+.folder-viewer {
+  max-width: 1500px;
+
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.folder-viewer-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 50px;
+}
+
+.folder-viewer-header h1 {
+  font-size: 52px;
+
+  margin-bottom: 10px;
+}
+
+.folder-viewer-header p {
+  color: #9ca3b8;
+}
+
+.folder-viewer-header button {
+  width: 54px;
+  height: 54px;
+
+  border-radius: 18px;
+
+  border: none;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.folder-viewer-header button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* GRID */
+
+.folder-sessions-grid {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 26px;
+
+  align-items: flex-start;
+}
+
+/* VIDEO MODAL */
+
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.92);
+
+  z-index: 5000;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+}
+
+.video-modal {
+  max-width: 90vw;
+  max-height: 90vh;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.video-modal video {
+  border-radius: 22px;
+
+  background: black;
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* LANDSCAPE */
+
+.video-modal video.landscape {
+  width: min(1200px, 90vw);
+
+  max-height: 85vh;
+
+  object-fit: contain;
+}
+
+/* PORTRAIT */
+
+.video-modal video.portrait {
+  height: 85vh;
+
+  max-width: 90vw;
+
+  object-fit: contain;
+}
+.close-video-btn {
+  position: absolute;
+
+  top: 5%;
+  right: -90px;
+
+  transform: translateY(-50%);
+
+  width: 60px;
+  height: 60px;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background:
+    rgba(20,20,28,0.82);
+
+  backdrop-filter: blur(16px);
+
+  color: white;
+
+  font-size: 30px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+  z-index: 50;
+
+  box-shadow:
+    0 12px 34px rgba(0,0,0,0.4);
+}
+
+.close-video-btn:hover {
+  transform:
+    translateY(-50%)
+    scale(1.08);
+
+  background:
+    rgba(35,35,45,0.95);
+}
+.video-modal {
+  position: relative;
+}

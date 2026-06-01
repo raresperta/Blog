@@ -1,0 +1,34 @@
+.fj-idea-vault {
+  min-height: 260px;
+}
+.fj-ideas {
+  display: flex;
+
+  gap: 12px;
+}
+
+.fj-idea-box {
+  flex: 1;
+
+  padding: 18px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  background: rgba(255,255,255,0.025);
+}
+
+.fj-idea-box span {
+  color: #9a7049;
+
+  font-size: 12px;
+}
+
+.fj-idea-box p {
+  margin-top: 14px;
+
+  color: #d5ab7d;
+
+  line-height: 1.8;
+}

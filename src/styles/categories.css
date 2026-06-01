@@ -1,0 +1,42 @@
+.categories {
+  margin-top: -220px;
+
+  padding: 0 70px;
+
+  position: relative;
+  z-index: 2;
+
+  isolation: isolate;
+}
+.categories-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 34px;
+
+  align-items: stretch;
+}
+.categories::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -80px -40px 0 -40px;
+
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(255,220,180,0.28),
+      rgba(255,240,220,0.08),
+      transparent 70%
+    );
+
+  filter: blur(60px);
+
+  opacity: 0.9;
+
+  pointer-events: none;
+}

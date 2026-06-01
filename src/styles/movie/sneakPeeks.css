@@ -1,0 +1,45 @@
+.fj-peek-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+}
+
+.fj-peek img {
+  width: 100%;
+  height: 170px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  filter:
+    brightness(0.78)
+    sepia(0.18)
+    contrast(1.05);
+
+  transition: 0.3s ease;
+}
+
+.fj-peek:hover img {
+  filter:
+    brightness(0.9)
+    sepia(0.1);
+}
+
+.fj-peek-info {
+  margin-top: 10px;
+}
+
+.fj-peek-info p {
+  color: #ddb083;
+
+  font-size: 15px;
+}
+
+.fj-peek-info span {
+  color: #8d6948;
+
+  font-size: 13px;
+}
