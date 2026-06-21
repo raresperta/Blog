@@ -1,10 +1,8 @@
 import "../../../styles/music/progress/SongsView.css";
 
-function SongsView({
-  videos,
-  onSelectSong,
-}) {
+function SongsView({ videos, songs, onSelectSong }) {
   const groupedSongs = {};
+  console.log(songs);
 
   videos.forEach((video) => {
     if (!groupedSongs[video.song]) {
@@ -16,10 +14,19 @@ function SongsView({
 
   return (
     <div className="songs-view-grid">
-      {Object.entries(groupedSongs).map(
-        ([songName, sessions]) => (
+      {Object.entries(groupedSongs).map(([songName, sessions]) => {
+        const currentSong = songs.find(
+          (song) => song.title.toLowerCase() === songName.toLowerCase(),
+        );
+
+        const isMastered = currentSong?.isMastered;
+
+        return (
           <div
-            className="song-select-card"
+            className={`
+                song-select-card
+                ${isMastered ? "mastered-song" : ""}
+              `}
             key={songName}
             onClick={() => onSelectSong(songName)}
           >
@@ -32,10 +39,7 @@ function SongsView({
 
               <img
                 className="song-select-img back-2"
-                src={
-                  sessions[1]?.thumbnail ||
-                  sessions[0].thumbnail
-                }
+                src={sessions[1]?.thumbnail || sessions[0].thumbnail}
                 alt=""
               />
 
@@ -49,13 +53,11 @@ function SongsView({
             <div className="song-select-info">
               <h2>{songName}</h2>
 
-              <p>
-                {sessions.length} sessions
-              </p>
+              <p>{sessions.length} sessions</p>
             </div>
           </div>
-        ),
-      )}
+        );
+      })}
     </div>
   );
 }

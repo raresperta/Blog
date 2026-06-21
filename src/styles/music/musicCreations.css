@@ -1,0 +1,55 @@
+.music-creations-page {
+  min-height: 100vh;
+  padding: 20px 32px;
+  background: radial-gradient(circle at top, #1b2340 0%, #090b12 60%);
+  color: white;
+}
+
+.creations-content {
+  margin-top: 24px;
+  min-height: 500px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 30px;
+}
+
+.empty-state {
+  color: #8e94a6;
+}
+.creation-context-menu {
+  position: fixed;
+  z-index: 99999;
+
+  min-width: 180px;
+  padding: 8px;
+
+  border-radius: 14px;
+
+  background: rgba(24, 28, 40, 0.95);
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  box-shadow: 0 12px 40px rgba(0,0,0,.45);
+}
+
+.creation-context-menu button {
+  width: 100%;
+  height: 42px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: transparent;
+  color: #ff6b6b;
+
+  text-align: left;
+  padding: 0 14px;
+
+  cursor: pointer;
+}
+
+.creation-context-menu button:hover {
+  background: rgba(255,255,255,.05);
+}

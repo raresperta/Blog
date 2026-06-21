@@ -7,21 +7,28 @@
 
   cursor: pointer;
 
-  transition: 0.28s ease;
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
 
   background: black;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border:
+    1px solid rgba(255,255,255,0.08);
 
   isolation: isolate;
 }
 
+/* HOVER */
+
 .timeline-card:hover {
-  transform: translateY(-4px) scale(1.01);
+  transform:
+    translateY(-4px)
+    scale(1.01);
 
   box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.42),
-    0 0 40px rgba(120, 90, 255, 0.14);
+    0 20px 50px rgba(0,0,0,0.42),
+    0 0 40px rgba(120,90,255,0.14);
 }
 
 /* -------------------- */
@@ -29,15 +36,34 @@
 /* -------------------- */
 
 .timeline-card img {
+  width: 100%;
+
+  display: block;
+
+  position: relative;
+
+  z-index: 1;
+
+  backface-visibility: hidden;
+
+  transform:
+    translateZ(0);
+
   transition:
     transform 0.35s ease,
     filter 0.35s ease;
 }
 
-.timeline-card:hover img {
-  transform: scale(1.04);
+/* IMPORTANT FIX */
 
-  filter: brightness(0.55) saturate(0.9) blur(1px);
+.timeline-card:hover img {
+  transform:
+    sscale(1.025)
+    translateZ(0);
+
+  filter:
+    brightness(0.55)
+    saturate(0.9);
 }
 
 /* -------------------- */
@@ -49,13 +75,9 @@
 }
 
 .timeline-card.landscape img {
-  width: 100%;
-
   aspect-ratio: 16/9;
 
   object-fit: cover;
-
-  display: block;
 }
 
 /* -------------------- */
@@ -67,15 +89,11 @@
 }
 
 .timeline-card.portrait img {
-  width: 100%;
-
   aspect-ratio: 9/16;
 
   object-fit: contain;
 
   background: black;
-
-  display: block;
 }
 
 /* -------------------- */
@@ -87,6 +105,10 @@
 
   inset: 0;
 
+  border-radius: 30px;
+
+  overflow: hidden;
+
   display: flex;
 
   flex-direction: column;
@@ -95,16 +117,22 @@
 
   padding: 18px;
 
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.82) 0%,
-    rgba(0, 0, 0, 0.35) 45%,
-    rgba(0, 0, 0, 0.12) 100%
-  );
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.82) 0%,
+      rgba(0,0,0,0.35) 45%,
+      rgba(0,0,0,0.12) 100%
+    );
 
   opacity: 0;
 
   transition: 0.28s ease;
+
+  z-index: 5;
+}
+.timeline-card.the-one .timeline-overlay {
+  border-radius: 30px;
 }
 
 .timeline-card:hover .timeline-overlay {
@@ -140,13 +168,16 @@
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.08);
+  background:
+    rgba(255,255,255,0.08);
 
   backdrop-filter: blur(10px);
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border:
+    1px solid rgba(255,255,255,0.08);
 
-  color: rgba(255, 255, 255, 0.88);
+  color:
+    rgba(255,255,255,0.88);
 
   font-size: 12px;
 
@@ -154,13 +185,15 @@
 
   margin-bottom: 12px;
 
-  box-shadow: 0 0 18px rgba(120, 90, 255, 0.12);
+  box-shadow:
+    0 0 18px rgba(120,90,255,0.12);
 }
 
 .video-description {
   margin: 0;
 
-  color: rgba(255, 255, 255, 0.92);
+  color:
+    rgba(255,255,255,0.92);
 
   font-size: 14px;
 
@@ -168,7 +201,8 @@
 
   font-weight: 500;
 
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  text-shadow:
+    0 2px 12px rgba(0,0,0,0.45);
 
   display: -webkit-box;
 
@@ -184,16 +218,27 @@
 /* -------------------- */
 
 .play-icon {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.88);
+
   width: 72px;
   height: 72px;
 
   border-radius: 50%;
 
-  background: rgba(0, 0, 0, 0.42);
+  background:
+    rgba(0,0,0,0.42);
 
   backdrop-filter: blur(16px);
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border:
+    1px solid rgba(255,255,255,0.08);
 
   display: flex;
 
@@ -204,13 +249,9 @@
 
   font-size: 28px;
 
-  align-self: center;
-
-  margin-bottom: 8px;
-
-  transform: scale(0.88);
-
   opacity: 0;
+
+  z-index: 8;
 
   transition:
     transform 0.28s ease,
@@ -219,9 +260,145 @@
 }
 
 .timeline-card:hover .play-icon {
-  transform: scale(1);
+  transform:
+    translate(-50%, -50%)
+    scale(1);
 
   opacity: 1;
 
-  box-shadow: 0 0 28px rgba(140, 90, 255, 0.22);
+  box-shadow:
+    0 0 28px rgba(140,90,255,0.22);
+}
+
+/* -------------------- */
+/* THE ONE */
+/* -------------------- */
+
+.videos-grid .timeline-card.the-one {
+  position: relative;
+
+  z-index: 5;
+
+  margin-left: 24px;
+  margin-right: 24px;
+
+  border-radius: 34px;
+
+  overflow: visible;
+
+  background: transparent;
+
+  transform: scale(1.03);
+
+  border: none;
+}
+
+/* KEEP ROUND CORNERS ON HOVER */
+
+.videos-grid .timeline-card.the-one:hover {
+  border-radius: 34px;
+}
+
+/* GLOW */
+
+.videos-grid .timeline-card.the-one::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -12px;
+
+  border-radius: 44px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(160,120,255,0.42) 0%,
+      rgba(140,100,255,0.18) 45%,
+      transparent 75%
+    );
+
+  filter: blur(28px);
+
+  z-index: -2;
+
+  pointer-events: none;
+}
+
+/* BORDER */
+
+.videos-grid .timeline-card.the-one::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -4px;
+
+  border-radius: 34px;
+
+  border:
+    3px solid rgba(205,180,255,0.95);
+
+  box-shadow:
+    0 0 18px rgba(180,140,255,0.9),
+    0 0 60px rgba(140,90,255,0.42);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+/* IMAGE FIX */
+
+.videos-grid .timeline-card.the-one img {
+  border-radius: 30px;
+
+  overflow: hidden;
+}
+
+/* IMPORTANT */
+/* fixes sharp corners on hover */
+
+.videos-grid .timeline-card.the-one:hover img {
+  border-radius: 30px;
+}
+
+/* STAR */
+
+.videos-grid .timeline-card.the-one .the-one-badge {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7ecff,
+      #d7b3ff
+    );
+
+  color: #241536;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 0 18px rgba(210,180,255,0.85);
+
+  border:
+    2px solid rgba(255,255,255,0.55);
+
+  z-index: 20;
 }

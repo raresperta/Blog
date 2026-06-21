@@ -1,0 +1,147 @@
+.video-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+}
+.latest-video-card {
+  height: 260px;
+
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.latest-video-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: transform .35s ease;
+}
+
+.latest-video-card:hover img {
+  transform: scale(1.04);
+}
+
+.video-card-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.1)
+    );
+
+  opacity: 0;
+
+  transition: .25s;
+}
+
+.latest-video-card:hover .video-card-overlay {
+  opacity: 1;
+}
+
+.video-card-play {
+  width: 72px;
+  height: 72px;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 28px;
+
+  color: white;
+
+  background:
+    rgba(255,255,255,.12);
+
+  border:
+    1px solid rgba(255,255,255,.18);
+
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.35);
+
+  transition: .25s;
+}
+
+.latest-video-card:hover .video-card-play {
+  transform: scale(1.08);
+}
+.video-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999999;
+
+  isolation: isolate;
+
+  display: flex;
+  justify-content: flex-end; /* <- dreapta */
+  align-items: center;
+
+  padding-right: 80px;
+
+  background: rgba(0,0,0,.88);
+
+  backdrop-filter: blur(20px);
+}
+.video-modal video {
+  max-width: 90vw;
+  max-height: 88vh;
+
+  border-radius: 28px;
+
+  background: black;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.5);
+}
+
+.close-video-btn {
+  position: absolute;
+
+  top: -50px;
+  right: 0;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  background:
+    rgba(255,255,255,.1);
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.video-modal {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999999;
+}

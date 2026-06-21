@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -20,11 +21,94 @@ function MusicVideos() {
 
   const [videos, setVideos] = useState([]);
 
+  const [songs, setSongs] = useState([]);
+
   const [openedFolder, setOpenedFolder] = useState(null);
 
   const [selectedSong, setSelectedSong] = useState(null);
 
   const [activeVideo, setActiveVideo] = useState(null);
+
+  const navigate = useNavigate();
+
+  const fullscreenVideoRef = useRef(null);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      /* SONG VIDEO */
+
+      if (activeVideo) {
+        setActiveVideo(null);
+
+        return;
+      }
+
+      /* SONG TIMELINE */
+
+      if (selectedSong) {
+        setSelectedSong(null);
+
+        return;
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [activeVideo, selectedSong]);
+  useEffect(() => {
+    function handleVideoKeys(e) {
+      if (!activeVideo) return;
+
+      const video = fullscreenVideoRef.current;
+
+      if (!video) return;
+
+      console.log("KEY:", e.key);
+
+      /* SPACE */
+
+      if (e.key === " ") {
+        e.preventDefault();
+
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+
+        return;
+      }
+
+      /* LEFT */
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+
+        video.currentTime = Math.max(0, video.currentTime - 3);
+
+        return;
+      }
+
+      /* RIGHT */
+
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+
+        video.currentTime = Math.min(video.duration, video.currentTime + 3);
+
+        return;
+      }
+    }
+
+    document.addEventListener("keydown", handleVideoKeys, true);
+
+    return () => {
+      document.removeEventListener("keydown", handleVideoKeys, true);
+    };
+  }, [activeVideo]);
   /* -------------------- */
   /* FETCH */
   /* -------------------- */
@@ -43,22 +127,18 @@ function MusicVideos() {
     }
   }
 
+  async function fetchSongs() {
+    try {
+      const res = await axios.get("http://localhost:5001/songs");
+      setSongs(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     fetchVideos();
-  }, []);
-
-  useEffect(() => {
-    const handlePopState = () => {
-      setSelectedSong(null);
-
-      setActiveVideo(null);
-    };
-
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
+    fetchSongs();
   }, []);
 
   /* -------------------- */
@@ -90,8 +170,6 @@ function MusicVideos() {
   /* -------------------- */
   function closeVideoViewer() {
     setActiveVideo(null);
-
-    window.history.back();
   }
   return (
     <div className="music-videos-page">
@@ -99,7 +177,9 @@ function MusicVideos() {
 
       <div className="videos-topbar">
         <div className="videos-header-left">
-          <h1>🎬 Guitar Sessions</h1>
+          <div className="music-page-logo" onClick={() => navigate("/music")}>
+            🎵 Guitar Sessions
+          </div>
 
           <div className="view-switcher">
             <button
@@ -128,11 +208,25 @@ function MusicVideos() {
       {/* CONTENT */}
 
       {viewMode === "timeline" && (
-        <VideoTimeline videos={videos} onOpenFolder={setOpenedFolder}/>
+        <VideoTimeline
+          videos={videos}
+          songs={songs}
+          onOpenFolder={(folder) => {
+            setOpenedFolder(folder);
+
+            window.history.pushState(
+              { folder: folder.songName },
+
+              "",
+
+              `#folder-${folder.songName}`,
+            );
+          }}
+        />
       )}
 
       {viewMode === "songs" && !selectedSong && (
-        <SongsView videos={videos} onSelectSong={openSong} />
+        <SongsView videos={videos} songs={songs} onSelectSong={openSong} />
       )}
 
       {viewMode === "songs" && selectedSong && (
@@ -168,12 +262,42 @@ function MusicVideos() {
         <FolderViewer
           folder={openedFolder}
           onClose={() => setOpenedFolder(null)}
+          onUpdateFolder={(updatedSessions) => {
+            /* CURRENT SONG */
+
+            const currentSong = openedFolder.songName;
+
+            /* UPDATE FOLDER */
+
+            setOpenedFolder((prev) => ({
+              ...prev,
+
+              sessions: updatedSessions,
+            }));
+
+            /* UPDATE GLOBAL VIDEOS */
+
+            setVideos((prevVideos) => {
+              const updated = prevVideos.map((video) => {
+                const editedVideo = updatedSessions.find(
+                  (v) => v.id === video.id,
+                );
+
+                return editedVideo || video;
+              });
+
+              return updated.sort(
+                (a, b) => new Date(b.date) - new Date(a.date),
+              );
+            });
+            fetchSongs();
+          }}
         />
       )}
       {activeVideo && (
         <div className="fullscreen-video-viewer" onClick={closeVideoViewer}>
-
           <video
+            ref={fullscreenVideoRef}
             src={activeVideo.videoUrl}
             controls
             autoPlay

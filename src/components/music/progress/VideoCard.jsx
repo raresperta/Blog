@@ -1,16 +1,22 @@
 import "../../../styles/music/progress/VideoCard.css";
 
-function VideoCard({ video, onOpenVideo }) {
+function VideoCard({ video, onOpenVideo, onEditVideo, className = "" }) {
   return (
     <div
       className={`
         timeline-card
         ${video.orientation}
+        ${video.isBestTake ? "the-one" : ""}
+        ${className}
       `}
       onClick={() => onOpenVideo(video)}
+      onContextMenu={(e) => {
+        e.preventDefault();
+
+        onEditVideo(video);
+      }}
     >
       <img src={video.thumbnail} alt="" />
-
       <div className="timeline-overlay">
         <div className="video-info">
           <span className="video-date">

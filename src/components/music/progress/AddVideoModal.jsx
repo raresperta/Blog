@@ -25,6 +25,8 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
   const [loading, setLoading] = useState(false);
 
+  const [isBestTake, setIsBestTake] = useState(false);
+
   const [date, setDate] = useState(new Date());
 
   const [showManualDate, setShowManualDate] = useState(false);
@@ -57,6 +59,8 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
     song.title.toLowerCase().includes(songInput.toLowerCase()),
   );
 
+  const recentSongs = [...songs].slice(-3).reverse();
+
   /* -------------------- */
   /* SELECT SONG */
   /* -------------------- */
@@ -75,13 +79,11 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
   async function handleAddSong() {
     try {
-      const res = await axios.post(
-        "http://localhost:5001/songs",
+      const res = await axios.post("http://localhost:5001/songs", {
+        title: songInput,
 
-        {
-          title: songInput,
-        },
-      );
+        isMastered: isBestTake,
+      });
 
       setSongs((prev) => [...prev, res.data.song]);
 
@@ -108,7 +110,7 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
     try {
       const res = await axios.post(
-        "http://localhost:5001/check-video-date",
+        "http://localhost:5001/sessions/check-video-date",
 
         formData,
 
@@ -165,16 +167,14 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
       formData.append("song", finalSong);
 
-      formData.append(
-        "date",
+      formData.append("isBestTake", isBestTake);
 
-        date.toISOString().split("T")[0],
-      );
+      formData.append("date", date.toISOString().split("T")[0]);
 
       formData.append("video", video);
 
       await axios.post(
-        "http://localhost:5001/upload-video",
+        "http://localhost:5001/sessions/upload-video",
 
         formData,
 
@@ -215,6 +215,11 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
             placeholder="Search or add song"
             value={songInput}
             onFocus={() => setShowResults(true)}
+            onBlur={() => {
+              setTimeout(() => {
+                setShowResults(false);
+              }, 120);
+            }}
             onChange={(e) => {
               setSongInput(e.target.value);
 
@@ -226,30 +231,56 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
           {/* RESULTS */}
 
-          {showResults && songInput && (
+          {showResults && (
             <div className="song-results">
-              {filteredSongs.map((song) => (
-                <button
-                  key={song.id}
-                  className="song-result"
-                  onClick={() => handleSongSelect(song.title)}
-                >
-                  {song.title}
-                </button>
-              ))}
+              {/* RECENT SONGS */}
+
+              {!songInput && recentSongs.length > 0 && (
+                <>
+                  <div className="song-results-label">Recent songs</div>
+
+                  {recentSongs.map((song) => (
+                    <button
+                      key={song.id}
+                      className="song-result"
+                      onMouseDown={() => handleSongSelect(song.title)}
+                    >
+                      {song.title}
+                    </button>
+                  ))}
+                </>
+              )}
+
+              {/* SEARCH RESULTS */}
+
+              {songInput &&
+                filteredSongs.map((song) => (
+                  <button
+                    key={song.id}
+                    className="song-result"
+                    onMouseDown={() => handleSongSelect(song.title)}
+                  >
+                    {song.title}
+                  </button>
+                ))}
 
               {/* ADD NEW */}
 
-              {!songs.some(
-                (song) => song.title.toLowerCase() === songInput.toLowerCase(),
-              ) && (
-                <button
-                  className="song-result add-new-song"
-                  onClick={handleAddSong}
-                >
-                  + Add "{songInput}"
-                </button>
-              )}
+              {songInput &&
+                !songs.some(
+                  (song) =>
+                    song.title.toLowerCase() === songInput.toLowerCase(),
+                ) && (
+                  <button
+                    className="
+            song-result
+            add-new-song
+          "
+                    onClick={handleAddSong}
+                  >
+                    + Add "{songInput}"
+                  </button>
+                )}
             </div>
           )}
         </div>
@@ -261,10 +292,16 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
             selected={date}
             onChange={(selectedDate) => setDate(selectedDate)}
             dateFormat="MMMM d, yyyy"
-            className="custom-datepicker"
+            className="
+              custom-datepicker
+            "
           />
         ) : (
-          <div className="detected-date-box">
+          <div
+            className="
+            detected-date-box
+          "
+          >
             🎥 Recording date detected: <strong>{detectedDateLabel}</strong>
           </div>
         )}
@@ -273,7 +310,9 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
         {!showDescription && (
           <button
-            className="add-description-btn"
+            className="
+              add-description-btn
+            "
             onClick={() => setShowDescription(true)}
           >
             + Add description
@@ -282,7 +321,11 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
         {showDescription && (
           <textarea
-            placeholder="Write thoughts, progress, ideas..."
+            placeholder="
+              Write thoughts,
+              progress,
+              ideas...
+            "
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -290,7 +333,11 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
         {/* VIDEO */}
 
-        <label className="video-upload-box">
+        <label
+          className="
+          video-upload-box
+        "
+        >
           <input
             type="file"
             accept="video/*"
@@ -298,6 +345,23 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
           />
 
           <div>{video ? video.name : "Select video"}</div>
+
+          {video && (
+            <button
+              type="button"
+              className={`
+                best-video-badge
+                ${isBestTake ? "active" : ""}
+              `}
+              onClick={(e) => {
+                e.preventDefault();
+
+                setIsBestTake(!isBestTake);
+              }}
+            >
+              ✦
+            </button>
+          )}
         </label>
 
         {/* SAVE */}

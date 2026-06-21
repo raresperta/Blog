@@ -1,0 +1,55 @@
+.creations-hero {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.creations-tag {
+  color: #7c6cff;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.creations-hero h1 {
+  font-size: 58px;
+  margin-top: 10px;
+}
+
+.creations-hero p {
+  color: #aab0c0;
+  max-width: 550px;
+  margin-top: 10px;
+}
+
+.upload-btn {
+  height: 52px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #7568ff, #5a54ff);
+  color: white;
+  cursor: pointer;
+}
+
+.creation-stats {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.stat-card {
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat-card h3 {
+  font-size: 34px;
+}
+
+.stat-card span {
+  color: #9ca3b4;
+}

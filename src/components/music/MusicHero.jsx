@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 function MusicHero() {
+
+  const navigate = useNavigate();
   return (
     <section className="music-hero">
       <div className="music-hero-left">
@@ -15,7 +19,10 @@ function MusicHero() {
         </p>
 
         <div className="music-buttons">
-          <button className="music-primary-btn">
+          <button
+            className="music-primary-btn"
+            onClick={() => navigate("/music/creations")}
+          >
             🎧 Ascultă creațiile mele
           </button>
 

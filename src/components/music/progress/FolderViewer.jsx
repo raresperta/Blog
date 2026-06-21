@@ -1,145 +1,218 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import VideoCard from "./VideoCard";
+import EditVideoModal from "./EditVideoModal";
 
 import "../../../styles/music/progress/FolderViewer.css";
 
-function FolderViewer({
-  folder,
-  onClose,
-  onOpenVideo
-}) {
-  const [
-    selectedVideo,
-    setSelectedVideo,
-  ] = useState(null);
+function FolderViewer({ folder, onClose, onUpdateFolder }) {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  const [editingVideo, setEditingVideo] = useState(null);
+
+  const [sessions, setSessions] = useState(folder.sessions);
+
+  const videoRef = useRef(null);
 
   /* -------------------- */
-  /* BACK GESTURE SUPPORT */
+  /* FOLDER HISTORY */
   /* -------------------- */
 
   useEffect(() => {
+    const handleFolderPopState = () => {
+      /* VIDEO OPEN */
 
-    window.history.pushState(
-      { folderOpen: true },
-      ""
-    );
+      if (selectedVideo) {
+        setSelectedVideo(null);
 
-    const handlePopState = () => {
+        return;
+      }
+
+      /* EDIT OPEN */
+
+      if (editingVideo) {
+        setEditingVideo(null);
+
+        return;
+      }
+
+      /* CLOSE FOLDER */
 
       onClose();
-
     };
 
-    window.addEventListener(
-      "popstate",
-      handlePopState
-    );
+    window.addEventListener("popstate", handleFolderPopState);
 
     return () => {
-
-      window.removeEventListener(
-        "popstate",
-        handlePopState
-      );
-
+      window.removeEventListener("popstate", handleFolderPopState);
     };
+  }, [selectedVideo, editingVideo, onClose]);
 
-  }, []);
+  useEffect(() => {
+    function handleVideoKeys(e) {
+      if (!selectedVideo) return;
+
+      const video = videoRef.current;
+
+      if (!video) return;
+
+      /* SPACE */
+
+      if (e.key === " ") {
+        e.preventDefault();
+
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+
+        return;
+      }
+
+      /* LEFT */
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+
+        video.currentTime = Math.max(0, video.currentTime - 3);
+
+        return;
+      }
+
+      /* RIGHT */
+
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+
+        video.currentTime = Math.min(video.duration, video.currentTime + 3);
+
+        return;
+      }
+    }
+
+    document.addEventListener("keydown", handleVideoKeys, true);
+
+    return () => {
+      document.removeEventListener("keydown", handleVideoKeys, true);
+    };
+  }, [selectedVideo]);
 
   /* -------------------- */
 
   return (
     <div className="folder-viewer-overlay">
-
       <div className="folder-viewer">
-
         {/* HEADER */}
 
         <div className="folder-viewer-header">
-
           <div>
+            <h1>{folder.songName}</h1>
 
-            <h1>
-              {folder.songName}
-            </h1>
-
-            <p>
-              {folder.sessions.length}
-              {" "}
-              sessions
-            </p>
-
+            <p>{sessions.length} sessions</p>
           </div>
 
-          <button onClick={onClose}>
-            ✕
-          </button>
-
+          <button onClick={onClose}>✕</button>
         </div>
 
         {/* GRID */}
 
         <div className="folder-sessions-grid">
+          {sessions.map((video) => (
+            <VideoCard
+              key={video.id || video.videoUrl}
+              video={video}
+              onOpenVideo={(video) => {
+                setSelectedVideo(video);
 
-          {folder.sessions.map(
-            (video) => (
-                <VideoCard
-                    key={video._id || video.videoUrl}
-                    video={video}
-                    onOpenVideo={setSelectedVideo}
-                  /> 
-            )
-          )}
+                window.history.pushState(
+                  { folderVideo: true },
+                  "",
+                  `#folder-video`,
+                );
+              }}
+              onEditVideo={(video) => {
+                setEditingVideo(video);
 
+                window.history.pushState(
+                  { editVideo: true },
+                  "",
+                  `#edit-video`,
+                );
+              }}
+            />
+          ))}
         </div>
-
       </div>
 
-      {/* PLAYER MODAL */}
+      {/* PLAYER */}
 
       {selectedVideo && (
-
         <div
           className="video-modal-overlay"
-          onClick={() =>
-            setSelectedVideo(null)
-          }
+          onClick={() => setSelectedVideo(null)}
         >
-
-          <div
-            className="video-modal"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
-          >
-
+          <div className="video-modal" onClick={(e) => e.stopPropagation()}>
             <button
               className="close-video-btn"
-              onClick={() =>
-                setSelectedVideo(null)
-              }
+              onClick={() => setSelectedVideo(null)}
             >
               ✕
             </button>
 
             <video
-              src={
-                selectedVideo.videoUrl
-              }
+              ref={videoRef}
+              src={selectedVideo.videoUrl}
               controls
               autoPlay
-              className={
-                selectedVideo.orientation
-              }
+              playsInline
+              className={selectedVideo.orientation}
             />
-
           </div>
-
         </div>
-
       )}
 
+      {/* EDIT */}
+
+      {editingVideo && (
+        <EditVideoModal
+          video={editingVideo}
+          onClose={() => {
+            setEditingVideo(null);
+          }}
+          onSave={(updatedVideo, action) => {
+            /* DELETE */
+
+            if (action === "delete") {
+              const updatedSessions = sessions.filter(
+                (session) => session.id !== updatedVideo.id,
+              );
+
+              setSessions(updatedSessions);
+              onUpdateFolder(updatedSessions);
+
+              if (updatedSessions.length === 0) {
+                onClose();
+              }
+
+              return;
+            }
+
+            /* EDIT */
+
+            const updatedSessions = sessions.map((session) => {
+              if (session.id === updatedVideo.id) {
+                return updatedVideo;
+              }
+
+              return session;
+            });
+
+            setSessions(updatedSessions);
+            onUpdateFolder(updatedSessions);
+          }}
+        />
+      )}
     </div>
   );
 }

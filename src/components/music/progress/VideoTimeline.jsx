@@ -4,9 +4,8 @@ import "../../../styles/music/progress/VideoTimeline.css";
 
 import SongFolders from "./SongFolders.jsx";
 
-function VideoTimeline({ videos, onOpenFolder}) {
+function VideoTimeline({ videos,songs, onOpenFolder}) {
   const groupedByMonth = {};
-
   videos.forEach((video) => {
     const month = new Date(video.date).toLocaleString("en-US", {
       month: "long",
@@ -57,7 +56,7 @@ function VideoTimeline({ videos, onOpenFolder}) {
 
   return (
     <div className="timeline-wrapper">
-      {Object.entries(groupedByMonth).map(([month, songs]) => {
+      {Object.entries(groupedByMonth).map(([month, piese]) => {
         const isOpen = openMonths[month];
 
         return (
@@ -75,7 +74,7 @@ function VideoTimeline({ videos, onOpenFolder}) {
             {/* CONTENT */}
 
             <div className={`month-content ${isOpen ? "open" : ""}`}>
-              <SongFolders groupedSongs={songs} onOpenFolder={onOpenFolder}/>
+              <SongFolders groupedSongs={piese} songs={songs} onOpenFolder={onOpenFolder}/>
             </div>
           </div>
         );
