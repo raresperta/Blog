@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { API_URL } from "../../../config.js";
+import { API_URL } from "../../../config";
 
 function AddVideoModal({ onClose, onUploadSuccess }) {
   const [songs, setSongs] = useState([]);
