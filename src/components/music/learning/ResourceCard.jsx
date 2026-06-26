@@ -10,11 +10,13 @@ import "../../../styles/music/learning/resourceCard.css";
 import { API_URL } from "../../../config";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
-  "pdfjs-dist/build/pdf.worker.min.mjs",
+  "react-pdf/node_modules/pdfjs-dist/build/pdf.worker.min.mjs",
 
   import.meta.url
 
 ).toString();
+
+console.log(pdfjs.GlobalWorkerOptions.workerSrc);
 
 function ResourceCard({ title, value, type, song, onSongUpdate }) {
   const fileInputRef = useRef(null);
