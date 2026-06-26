@@ -8,8 +8,15 @@ import ResourceLinkModal from "./ResourceLinkModal";
 
 import "../../../styles/music/learning/resourceCard.css";
 import { API_URL } from "../../../config";
+import { pdfjs } from "react-pdf";
 
-pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+
+  import.meta.url
+
+).toString();
 
 function ResourceCard({ title, value, type, song, onSongUpdate }) {
   const fileInputRef = useRef(null);
