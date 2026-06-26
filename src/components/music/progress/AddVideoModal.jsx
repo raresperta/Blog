@@ -8,6 +8,8 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import { API_URL } from "../../../config.js";
+
 function AddVideoModal({ onClose, onUploadSuccess }) {
   const [songs, setSongs] = useState([]);
 
@@ -43,7 +45,7 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
   async function fetchSongs() {
     try {
-      const res = await axios.get("http://localhost:5001/songs");
+      const res = await axios.get(`${API_URL}/songs`);
 
       setSongs(res.data);
     } catch (err) {
@@ -79,7 +81,7 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
   async function handleAddSong() {
     try {
-      const res = await axios.post("http://localhost:5001/songs", {
+      const res = await axios.post(`${API_URL}/songs`, {
         title: songInput,
 
         isMastered: isBestTake,
@@ -110,7 +112,7 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
 
     try {
       const res = await axios.post(
-        "http://localhost:5001/sessions/check-video-date",
+        `${API_URL}/sessions/check-video-date`,
 
         formData,
 
@@ -174,7 +176,7 @@ function AddVideoModal({ onClose, onUploadSuccess }) {
       formData.append("video", video);
 
       await axios.post(
-        "http://localhost:5001/sessions/upload-video",
+        `${API_URL}/sessions/upload-video`,
 
         formData,
 

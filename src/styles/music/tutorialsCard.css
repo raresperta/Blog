@@ -1,0 +1,64 @@
+.tutorial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tutorial-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  padding: 14px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+
+  transition: all .25s ease;
+}
+
+
+.tutorial-item img {
+  width: 78px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.tutorial-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.tutorial-meta h4 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tutorial-meta p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+}
+
+.tutorial-open-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  background: rgba(117,104,255,.18);
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+
+  transition: all .2s ease;
+}

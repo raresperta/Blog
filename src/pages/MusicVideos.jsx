@@ -10,12 +10,13 @@ import SongTimelineView from "../components/music/progress/SongTimelineView";
 import AddVideoModal from "../components/music/progress/AddVideoModal";
 import FolderViewer from "../components/music/progress/FolderViewer";
 import MusicHero from "../components/music/progress/MusicHero";
-
-import "../styles/music/progress/VideosTopbar.css";
+import MusicNavbar from "../components/music/MusicNavbar";
 import "../styles/musicVideos.css";
 
+import {API_URL} from "../config";
+
 function MusicVideos() {
-  const [viewMode, setViewMode] = useState("timeline");
+  const [viewMode, setViewMode] = useState("songs");
 
   const [showModal, setShowModal] = useState(false);
 
@@ -115,7 +116,7 @@ function MusicVideos() {
 
   async function fetchVideos() {
     try {
-      const res = await axios.get("http://localhost:5001/sessions");
+      const res = await axios.get(`${API_URL}/sessions`);
 
       const sorted = [...res.data].sort(
         (a, b) => new Date(b.date) - new Date(a.date),
@@ -129,7 +130,7 @@ function MusicVideos() {
 
   async function fetchSongs() {
     try {
-      const res = await axios.get("http://localhost:5001/songs");
+      const res = await axios.get(`${API_URL}/songs`);
       setSongs(res.data);
     } catch (err) {
       console.log(err);
@@ -174,36 +175,17 @@ function MusicVideos() {
   return (
     <div className="music-videos-page">
       {/* TOPBAR */}
+      <MusicNavbar/>
 
       <div className="videos-topbar">
-        <div className="videos-header-left">
-          <div className="music-page-logo" onClick={() => navigate("/music")}>
-            🎵 Guitar Sessions
-          </div>
-
-          <div className="view-switcher">
-            <button
-              className={viewMode === "timeline" ? "active-view" : ""}
-              onClick={handleTimelineClick}
-            >
-              Timeline
-            </button>
-
-            <button
-              className={viewMode === "songs" ? "active-view" : ""}
-              onClick={handleSongsClick}
-            >
-              Songs
-            </button>
-          </div>
-        </div>
+        
 
         <button className="new-session-btn" onClick={() => setShowModal(true)}>
           + New Session
         </button>
       </div>
 
-      <MusicHero videos={videos} />
+      {/*<MusicHero videos={videos} />*/}
 
       {/* CONTENT */}
 

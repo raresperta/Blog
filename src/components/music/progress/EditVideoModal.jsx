@@ -4,6 +4,8 @@ import axios from "axios";
 
 import "../../../styles/music/progress/EditVideoModal.css";
 
+import {API_URL} from "../../../config";
+
 function EditVideoModal({ video, onClose, onSave }) {
   const videoRef = useRef(null);
 
@@ -275,7 +277,7 @@ function EditVideoModal({ video, onClose, onSave }) {
       setLoading(true);
 
       const res = await axios.patch(
-        "http://localhost:5001/sessions/videos/" + video.id,
+        `${API_URL}/sessions/videos/` + video.id,
 
         {
           description,
@@ -308,7 +310,7 @@ function EditVideoModal({ video, onClose, onSave }) {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete("http://localhost:5001/sessions/videos/" + video.id);
+      await axios.delete(`${API_URL}/sessions/videos/` + video.id);
 
       onSave(video, "delete");
 

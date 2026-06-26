@@ -1,22 +1,18 @@
 import { useNavigate } from "react-router-dom";
 
 function MusicHero() {
-
   const navigate = useNavigate();
   return (
-    <section className="music-hero">
+    <section className="music-hero-main">
       <div className="music-hero-left">
         <span className="music-tag">MY MUSIC SPACE</span>
 
         <h1>
-          My Music <br />
+          My Music 
           Journey
         </h1>
 
-        <p>
-          Creez, învăț și evoluez în fiecare zi. Bine ai venit în călătoria mea
-          muzicală.
-        </p>
+        <span className="music-subtitle">Create • Practice • Improve</span>
 
         <div className="music-buttons">
           <button
@@ -26,7 +22,12 @@ function MusicHero() {
             🎧 Ascultă creațiile mele
           </button>
 
-          <button className="music-secondary-btn">Vezi progresul</button>
+          <button
+            className="music-secondary-btn"
+            onClick={() => navigate("/music/videos")}
+          >
+            Vezi progresul
+          </button>
         </div>
       </div>
 

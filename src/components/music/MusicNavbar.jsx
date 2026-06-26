@@ -8,10 +8,10 @@ function MusicNavbar() {
 
       <div className="music-nav-links">
         <a href="/">Home</a>
-        <a className="active-link">Music</a>
-        <a>Blog</a>
-        <a>About</a>
-        <a>Contact</a>
+        <a href="/music">Music</a>
+        <a href="/music/creations">Creations</a>
+        <a href="/music/videos">Progress</a>
+        <a href="/music/learning">Learning</a>
       </div>
 
     </nav>

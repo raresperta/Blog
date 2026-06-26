@@ -1,38 +1,16 @@
 .music-videos-page {
   min-height: 100vh;
-
   padding: 18px 34px 60px;
-
   max-width: 1700px;
-
   margin: 0 auto;
 
   position: relative;
-
   overflow: hidden;
 
   background:
-    radial-gradient(
-      circle at top center,
-      rgba(45, 55, 140, 0.22),
-      transparent 26%
-    ),
-
-    radial-gradient(
-      circle at 50% 120%,
-      rgba(90, 40, 255, 0.10),
-      transparent 34%
-    ),
-
-    linear-gradient(
-      180deg,
-      #03040a 0%,
-      #04050d 45%,
-      #020309 100%
-    );
+  radial-gradient(circle at top, #151922 0%, #090b12 60%);
 
   color: white;
-
   font-family: Inter, sans-serif;
 }
 
@@ -41,11 +19,12 @@
 .videos-topbar {
   display: flex;
 
-  justify-content: space-between;
+  justify-content: flex-end;
 
   align-items: center;
 
   margin: 0 18px 10px;
+  margin-bottom:30px;
 }
 
 .videos-header-left {
@@ -97,43 +76,38 @@
 }
 
 .active-view {
-  background: #5a54ff !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.06)
+    ) !important;
 
   color: white !important;
 
-  box-shadow: 0 8px 24px rgba(90, 84, 255, 0.35);
-}
+  border-color: rgba(255,255,255,.14);
 
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
 /* NEW SESSION */
 
 .new-session-btn {
   height: 40px;
-
   padding: 0 20px;
-
   border-radius: 12px;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,.08);
+  outline: none;
 
-  background: linear-gradient(135deg, #6d63ff, #524bff);
+  background: rgba(255,255,255,.05);
+  background-image: none;
+
+  box-shadow: none;
 
   color: white;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: 0.25s;
-
-  box-shadow: 0 10px 30px rgba(82, 75, 255, 0.35);
 }
 
-.new-session-btn:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 14px 40px rgba(82, 75, 255, 0.45);
-}
 .fullscreen-video-viewer {
   position: fixed;
 

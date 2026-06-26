@@ -17,3 +17,9 @@
 .active-tab {
   background: #5a54ff !important;
 }
+.creations-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 22px;
+}

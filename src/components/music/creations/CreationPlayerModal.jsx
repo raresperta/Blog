@@ -1,50 +1,15 @@
 import { useRef, useState, useEffect } from "react";
 import "../../../styles/music/creations/CreationPlayerModal.css";
 
-function CreationPlayerModal({ item, onClose, showCover = true }) {
+function CreationPlayerModal({ item, onClose }) {
   const audioRef = useRef(null);
   const animationRef = useRef(null);
 
   const [playing, setPlaying] = useState(false);
-  const [bars, setBars] = useState(new Array(16).fill(20));
-
-  /* -------------------- */
-  /* FAKE VISUALIZER */
-  /* -------------------- */
-
-  function startBarsAnimation() {
-    function update() {
-      setBars(
-        Array.from({ length: 16 }, (_, i) => {
-          const centerBoost = 1 - Math.abs(i - 7.5) / 8;
-
-          const min = 20;
-          const max = 40 + centerBoost * 80;
-
-          return min + Math.random() * max;
-        }),
-      );
-
-      animationRef.current = requestAnimationFrame(update);
-    }
-
-    update();
-  }
-
-  function stopBarsAnimation() {
-    cancelAnimationFrame(animationRef.current);
-    animationRef.current = null;
-
-    setBars(new Array(16).fill(20));
-  }
-
-  /* -------------------- */
-  /* PLAY */
-  /* -------------------- */
+  const isSong = item.type === "songs";
 
   async function togglePlay() {
     const audio = audioRef.current;
-
     if (!audio) return;
 
     if (audio.paused) {
@@ -54,41 +19,25 @@ function CreationPlayerModal({ item, onClose, showCover = true }) {
     }
   }
 
-  /* -------------------- */
-  /* AUDIO EVENTS */
-  /* -------------------- */
-
   useEffect(() => {
     const audio = audioRef.current;
+    if (!audio || item.type === "lyrics") return;
 
-    if (!audio) return;
     audio
       .play()
-
-      .then(() => {
-        setPlaying(true);
-
-        startBarsAnimation();
-      })
-
+      .then(() => setPlaying(true))
       .catch(console.log);
 
     function onPlay() {
       setPlaying(true);
-
-      if (!animationRef.current) {
-        startBarsAnimation();
-      }
     }
 
     function onPause() {
       setPlaying(false);
-      stopBarsAnimation();
     }
 
     function onEnded() {
       setPlaying(false);
-      stopBarsAnimation();
     }
 
     audio.addEventListener("play", onPlay);
@@ -100,24 +49,12 @@ function CreationPlayerModal({ item, onClose, showCover = true }) {
       audio.removeEventListener("pause", onPause);
       audio.removeEventListener("ended", onEnded);
     };
-  }, []);
+  }, [item.type]);
 
-  /* -------------------- */
-  /* CLEANUP */
-  /* -------------------- */
-
-  useEffect(() => {
-    return () => {
-      cancelAnimationFrame(animationRef.current);
-    };
-  }, []);
   useEffect(() => {
     function handleKeys(e) {
       const audio = audioRef.current;
-
-      if (!audio) return;
-
-      /* SPACE */
+      if (!audio || item.type === "lyrics") return;
 
       if (e.code === "Space") {
         e.preventDefault();
@@ -125,24 +62,17 @@ function CreationPlayerModal({ item, onClose, showCover = true }) {
         return;
       }
 
-      /* LEFT */
-
       if (e.code === "ArrowLeft") {
         e.preventDefault();
-
         audio.currentTime = Math.max(0, audio.currentTime - 3);
-
         return;
       }
 
-      /* RIGHT */
-
       if (e.code === "ArrowRight") {
         e.preventDefault();
-
         audio.currentTime = Math.min(
           audio.duration || 0,
-          audio.currentTime + 3,
+          audio.currentTime + 3
         );
       }
     }
@@ -152,41 +82,71 @@ function CreationPlayerModal({ item, onClose, showCover = true }) {
     return () => {
       window.removeEventListener("keydown", handleKeys);
     };
-  }, []);
+  }, [item.type]);
 
-  /* -------------------- */
+  if (item.type === "lyrics") {
+    return (
+      <div
+        className="song-player-overlay"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose();
+        }}
+      >
+        <div className="song-player-modal">
+          <button onClick={onClose}>✕</button>
+
+          <h2>{item.title}</h2>
+
+          <pre className="lyrics-text">{item.description}</pre>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
       className="song-player-overlay"
       onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
+        if (e.target === e.currentTarget) onClose();
       }}
     >
       <div className="song-player-modal" onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose}>✕</button>
 
-        <div className="cover-area">
-          {showCover ? (
+        {isSong ? (
+          <div className="cover-area">
             <img src={item.coverImage} alt="" />
-          ) : (
-            <div className="no-cover-visual">🎧</div>
-          )}
 
-          {playing && (
-            <div className="cover-bars">
-              {Array.from({ length: 40 }).map((_, i) => (
-                <span key={i} />
+            {playing && (
+              <div className="cover-bars">
+                {Array.from({ length: 40 }).map((_, i) => (
+                  <span key={i} />
+                ))}
+              </div>
+            )}
+
+            <button className="big-play-btn" onClick={togglePlay}>
+              {playing ? "❚❚" : "▶"}
+            </button>
+          </div>
+        ) : (
+          <div className="visualizer-box">
+            <div className="sound-bars">
+              {Array.from({ length: 32 }).map((_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    animationDuration: `${0.7 + (i % 5) * 0.25}s`,
+                  }}
+                />
               ))}
             </div>
-          )}
 
-          <button className="big-play-btn" onClick={togglePlay}>
-            {playing ? "❚❚" : "▶"}
-          </button>
-        </div>
+            <button className="center-play-btn" onClick={togglePlay}>
+              {playing ? "❚❚" : "▶"}
+            </button>
+          </div>
+        )}
 
         <audio
           ref={audioRef}

@@ -16,7 +16,7 @@
 /* ===================== */
 
 .music-navbar {
-  height: 60px;
+  height: 30px;
 
   display: flex;
   align-items: center;
@@ -57,69 +57,76 @@
 /* HERO */
 /* ===================== */
 
-.music-hero {
+.music-hero-main {
   display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 26px;
-
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
   align-items: center;
 
-  margin-bottom: 22px;
-}
+  padding: 28px 30px;
+  margin-bottom: 20px;
 
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.025)
+    );
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 28px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 10px 40px rgba(0,0,0,.25);
+}
 .music-tag {
   color: #7c6cff;
-
-  font-size: 11px;
-
+  font-size: 10px;
   letter-spacing: 3px;
 }
 
 .music-hero-left h1 {
-  font-size: 54px;
-
-  line-height: 0.92;
-
-  margin: 10px 0;
+  font-size: 50px;
+  line-height: 0.9;
+  margin: 8px 0 10px;
 }
 
-.music-hero-left p {
-  color: #b8bfd1;
-
-  font-size: 17px;
-
-  line-height: 1.45;
-
-  max-width: 520px;
+.music-subtitle {
+  display: block;
+  color: #9ea4b5;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .music-buttons {
   display: flex;
-
   gap: 12px;
-
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .music-primary-btn,
 .music-secondary-btn {
-  height: 48px;
-
-  padding: 0 22px;
-
-  border-radius: 14px;
-
-  border: none;
-
-  font-size: 14px;
-
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 13px;
   cursor: pointer;
 
-  transition: .25s;
+  border: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
+.music-primary-btn:focus,
+.music-secondary-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
 .music-primary-btn {
   background:
     linear-gradient(
@@ -132,10 +139,7 @@
 
   box-shadow:
     0 10px 28px rgba(90,84,255,.35);
-}
 
-.music-primary-btn:hover {
-  transform: translateY(-2px);
 }
 
 .music-secondary-btn {
@@ -150,15 +154,12 @@
 
 .music-hero-right img {
   width: 100%;
-
-  height: 240px;
-
+  height: 170px;
   object-fit: cover;
-
-  border-radius: 24px;
+  border-radius: 22px;
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,.45);
+    0 20px 60px rgba(0,0,0,.35);
 }
 
 /* ===================== */
@@ -168,7 +169,7 @@
 .music-grid {
   display: grid;
 
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
 
   gap: 18px;
 

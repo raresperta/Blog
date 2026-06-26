@@ -2,219 +2,217 @@
   margin-top: 18px;
 }
 
-/* -------------------- */
-/* BACK */
-/* -------------------- */
+/* ---------- WRAPPER ---------- */
 
-.back-button {
-  height: 42px;
+.song-timeline-page .timeline-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-  padding: 0 18px;
+/* ---------- MONTH CARD ---------- */
 
-  border-radius: 14px;
+.song-timeline-page .month-group {
+  padding: 22px 24px;
+  border-radius: 26px;
 
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.018)
+    );
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.02)
-  );
+  border: 1px solid rgba(255,255,255,.06);
 
-  color: white;
+  backdrop-filter: blur(18px);
 
+  transition: .25s ease;
+}
+
+.song-timeline-page .month-group:hover {
+  border-color: rgba(255,255,255,.1);
+}
+
+/* ---------- HEADER ---------- */
+
+.song-timeline-page .month-header {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
 
-  margin-bottom: 28px;
-
-  transition: 0.25s;
-
-  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
 }
 
-.back-button:hover {
-  background: rgba(120, 90, 255, 0.12);
+.song-timeline-page .month-header h2 {
+  margin: 0;
 
-  border-color: rgba(120, 90, 255, 0.16);
-
-  box-shadow: 0 0 24px rgba(120, 90, 255, 0.16);
-}
-
-/* -------------------- */
-/* HEADER */
-/* -------------------- */
-
-.song-timeline-header {
-  margin-bottom: 20px;
-}
-
-.song-timeline-header h1 {
-  font-size: 68px;
-
-  line-height: 0.9;
-
-  letter-spacing: -4px;
-
-  margin: 0 0 12px 0;
+  font-size: 32px;
+  font-weight: 750;
+  letter-spacing: -1px;
 
   color: white;
 }
 
-.song-timeline-header span {
-  display: block;
+/* ---------- CONTENT ---------- */
 
-  color: rgba(255, 255, 255, 0.55);
+.song-timeline-page .month-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
 
-  font-size: 16px;
-
-  margin-top: 0;
+  transition:
+    max-height .35s ease,
+    opacity .25s ease;
 }
 
-/* -------------------- */
-/* VIDEO GRID */
-/* -------------------- */
+.song-timeline-page .month-content.open {
+  max-height: 2500px;
+  opacity: 1;
+  padding-top: 20px;
+}
+
+/* ---------- GRID ---------- */
 
 .videos-grid {
   display: flex;
+  gap: 14px;
 
-  flex-wrap: wrap;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  gap: 16px;
+  padding: 6px 2px 10px;
 
-  align-items: flex-start;
+  scrollbar-width: none;
 }
 
-/* -------------------- */
-/* MUCH SMALLER CARDS */
-/* -------------------- */
+.videos-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- CARD OVERRIDES ---------- */
+
+.videos-grid .timeline-card {
+  flex-shrink: 0;
+
+  border-radius: 18px !important;
+
+  overflow: hidden;
+
+  background: rgba(255,255,255,.03);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.22);
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease;
+}
+
+.videos-grid .timeline-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(255,255,255,.14);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.34);
+}
+
+/* ---------- DIMENSIONS ---------- */
 
 .videos-grid .timeline-card.landscape {
   width: 180px !important;
 }
 
 .videos-grid .timeline-card.portrait {
-  width: 140px !important;
+  width: 96px !important;
 }
 
-/* height vibe like SongFolders */
-
-.videos-grid .timeline-card {
-  border-radius: 22px;
-
-  overflow: hidden;
-
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    border-color 0.22s ease;
-
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
-}
-
-.videos-grid .timeline-card:hover {
-  transform: translateY(-3px) scale(1.015);
-
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
-}
-
-/* -------------------- */
-/* IMAGE */
-/* -------------------- */
+/* unify height */
 
 .videos-grid .timeline-card img {
+  width: 100%;
+  height: 140px !important;
+  object-fit: cover;
   display: block;
 }
 
-/* landscape */
-
-.videos-grid .timeline-card.landscape img {
-  aspect-ratio: 16/9;
-
-  object-fit: cover;
-}
-
-/* portrait */
+/* portrait special */
 
 .videos-grid .timeline-card.portrait img {
-  aspect-ratio: 9/16;
-
   object-fit: cover;
 }
 
-/* -------------------- */
-/* OVERLAY */
-/* -------------------- */
+/* ---------- OVERLAY ---------- */
 
 .videos-grid .timeline-overlay {
-  padding: 12px;
-
-  justify-content: space-between;
-}
-
-/* smaller play */
-
-.videos-grid .play-icon {
-  width: 52px;
-  height: 52px;
-
-  font-size: 20px;
-
-  align-self: center;
-}
-
-/* -------------------- */
-/* TEXT */
-/* -------------------- */
-
-.videos-grid .video-info {
-  gap: 8px;
+  padding: 10px;
 }
 
 .videos-grid .video-date {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+
+.videos-grid .video-info p {
   font-size: 11px;
+  line-height: 1.25;
 
-  padding: 5px 10px;
+  -webkit-line-clamp: 2;
+}
 
+/* ---------- PLAY ---------- */
+
+.videos-grid .play-icon {
+  width: 42px;
+  height: 42px;
+  font-size: 16px;
+}
+
+/* ---------- BEST ---------- */
+
+.videos-grid .timeline-card.the-one {
+  border: 1px solid rgba(255,255,255,.18);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.03),
+    0 16px 32px rgba(0,0,0,.34);
+}
+
+.videos-grid .timeline-card.the-one::after {
+  content: "BEST";
+
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  padding: 5px 9px;
   border-radius: 999px;
+
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.16);
+
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .8px;
+
+  backdrop-filter: blur(12px);
+
+  z-index: 20;
 }
 
-.videos-grid .video-description {
-  font-size: 12px;
-
-  line-height: 1.35;
-
-  max-width: 100%;
-}
-
-/* -------------------- */
-/* MONTH SPACING */
-/* -------------------- */
-
-.song-timeline-page .timeline-wrapper {
-  gap: 16px;
-}
-
-.song-timeline-page .month-content.open {
-  padding-top: 18px;
-}
-
-/* make month cards tighter */
-
-.song-timeline-page .month-group {
-  padding-bottom: 18px;
-}
-
-/* -------------------- */
-/* MOBILE */
-/* -------------------- */
+/* ---------- MOBILE ---------- */
 
 @media (max-width: 768px) {
-  .song-timeline-header h1 {
-    font-size: 44px;
-  }
-
-  .videos-grid {
-    gap: 12px;
+  .song-timeline-page .month-header h2 {
+    font-size: 22px;
   }
 
   .videos-grid .timeline-card.landscape {
@@ -222,145 +220,10 @@
   }
 
   .videos-grid .timeline-card.portrait {
-    width: 115px !important;
+    width: 84px !important;
   }
-}
-/* -------------------- */
-/* THE ONE */
-/* -------------------- */
 
-.videos-grid .timeline-card.the-one {
-  position: relative;
-
-  z-index: 5;
-
-  margin-left: 22px;
-  margin-right: 22px;
-
-  border-radius: 30px !important;
-
-  overflow: visible !important;
-
-  transform:
-    translateY(-4px);
-
-  border:
-    3px solid rgba(180,140,255,0.95);
-
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,0.06),
-    0 0 45px rgba(130,90,255,0.55),
-    0 0 120px rgba(130,90,255,0.35),
-    0 35px 90px rgba(0,0,0,0.6);
-
-  transition:
-    transform 0.28s ease,
-    box-shadow 0.28s ease;
-}
-
-/* MAIN OUTER GLOW */
-
-/* -------------------- */
-/* THE ONE */
-/* -------------------- */
-
-.videos-grid .timeline-card.the-one {
-  position: relative;
-
-  z-index: 5;
-
-  margin-left: 22px;
-  margin-right: 22px;
-
-  overflow: visible !important;
-
-  border-radius: 30px !important;
-
-  /* FULL PREMIUM BORDER */
-
-  border: 3px solid #c69cff;
-
-  /* PREMIUM GLOW */
-
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,0.06),
-    0 0 28px rgba(188,140,255,0.82),
-    0 0 90px rgba(140,90,255,0.52),
-    0 25px 70px rgba(0,0,0,0.58);
-
-  transform: scale(1.025);
-}
-
-/* OUTER GLOW */
-
-.videos-grid .timeline-card.the-one::before {
-  content: "";
-
-  position: absolute;
-
-  inset: -18px;
-
-  border-radius: 44px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(190,140,255,0.42),
-      transparent 74%
-    );
-
-  filter: blur(30px);
-
-  z-index: -1;
-
-  pointer-events: none;
-}
-
-/* IMAGE */
-
-.videos-grid .timeline-card.the-one img {
-  border-radius: 24px;
-}
-
-/* STAR BADGE */
-
-.videos-grid .timeline-card.the-one::after {
-  content: "✦";
-
-  position: absolute;
-
-  top: 10px;
-  right: 10px;
-
-  width: 36px;
-  height: 36px;
-
-  border-radius: 999px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  background:
-    linear-gradient(
-      180deg,
-      #f8eeff,
-      #d7acff
-    );
-
-  color: #1f1230;
-
-  font-size: 15px;
-
-  font-weight: 700;
-
-  border:
-    2px solid rgba(255,255,255,0.55);
-
-  box-shadow:
-    0 0 18px rgba(210,170,255,0.85),
-    0 0 40px rgba(170,120,255,0.5);
-
-  backdrop-filter: blur(10px);
+  .videos-grid .timeline-card img {
+    height: 115px !important;
+  }
 }

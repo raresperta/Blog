@@ -1,22 +1,150 @@
 .music-creations-page {
   min-height: 100vh;
-  padding: 20px 32px;
-  background: radial-gradient(circle at top, #1b2340 0%, #090b12 60%);
+  padding: 20px 32px 40px;
+
+  background:
+    radial-gradient(circle at top, #1b2340 0%, #090b12 60%);
+
   color: white;
 }
 
-.creations-content {
-  margin-top: 24px;
-  min-height: 500px;
+/* ---------- TOOLBAR ---------- */
+
+.creations-toolbar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  padding: 18px 22px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+
   border-radius: 24px;
+
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.07);
+
+  backdrop-filter: blur(12px);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ---------- STATS ---------- */
+
+.creation-stats {
+  display: flex;
+}
+
+.stat-card {
+  min-width: 120px;
+  padding: 14px 18px;
+  border-radius: 18px;
+
   background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.stat-card span {
+  display: block;
+  margin-top: 6px;
+
+  color: #98a0b5;
+  font-size: 13px;
+}
+
+/* ---------- TABS ---------- */
+
+.creations-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.creations-tabs button {
+  height: 42px;
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.05);
+  color: #bfc5d6;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.creations-tabs button:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.active-tab {
+  background: linear-gradient(
+    135deg,
+    #7568ff,
+    #5a54ff
+  ) !important;
+
+  color: white !important;
+}
+
+/* ---------- NEW BUTTON ---------- */
+
+.new-song-btn {
+  height: 46px;
+  padding: 0 22px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #7568ff,
+    #5a54ff
+  );
+
+  color: white;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.22s;
+}
+
+.new-song-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(124,108,255,.25);
+}
+
+/* ---------- CONTENT ---------- */
+
+.creations-content {
+  min-height: 420px;
+
+  border-radius: 28px;
+  padding: 28px;
+
+  background: rgba(255,255,255,0.035);
   border: 1px solid rgba(255,255,255,0.08);
-  padding: 30px;
 }
 
 .empty-state {
   color: #8e94a6;
 }
+
+/* ---------- CONTEXT MENU ---------- */
+
 .creation-context-menu {
   position: fixed;
   z-index: 99999;

@@ -7,6 +7,9 @@ import CreationsHero from "../components/music/creations/CreationsHero";
 import CreationsGrid from "../components/music/creations/CreationsGrid";
 import CreationPlayerModal from "../components/music/creations/CreationPlayerModal";
 
+import {API_URL} from "../config";
+
+
 import "../styles/music/musicCreations.css";
 
 function MusicCreationsPage() {
@@ -26,7 +29,7 @@ function MusicCreationsPage() {
 
   async function handleDelete(id) {
     try {
-      await axios.delete(`http://localhost:5001/creations/${id}`);
+      await axios.delete(`${API_URL}/creations/${id}`);
 
       setCreations((prev) => prev.filter((item) => item.id !== id));
 
@@ -56,7 +59,7 @@ function MusicCreationsPage() {
       }
 
       const res = await axios.post(
-        "http://localhost:5001/creations",
+        `${API_URL}/creations`,
         formData,
         {
           headers: {
@@ -87,7 +90,7 @@ function MusicCreationsPage() {
 
   async function fetchCreations() {
     try {
-      const res = await axios.get("http://localhost:5001/creations");
+      const res = await axios.get(`${API_URL}/creations`);
 
       setCreations(res.data);
     } catch (err) {
@@ -125,56 +128,58 @@ function MusicCreationsPage() {
       <CreationsHero items={creations} />
 
       {/* TABS */}
+      <div className="creations-toolbar">
+        <div className="toolbar-left">
 
-      <div className="creations-tabs">
-        <button
-          className={activeTab === "songs" ? "active-tab" : ""}
-          onClick={() => setActiveTab("songs")}
-        >
-          Songs
-        </button>
+          <div className="creations-tabs">
+            <button
+              className={activeTab === "songs" ? "active-tab" : ""}
+              onClick={() => setActiveTab("songs")}
+            >
+              Songs
+            </button>
+
+            <button
+              className={activeTab === "samples" ? "active-tab" : ""}
+              onClick={() => setActiveTab("samples")}
+            >
+              Samples
+            </button>
+
+            <button
+              className={activeTab === "riffs" ? "active-tab" : ""}
+              onClick={() => setActiveTab("riffs")}
+            >
+              Riffs
+            </button>
+
+            <button
+              className={activeTab === "drums" ? "active-tab" : ""}
+              onClick={() => setActiveTab("drums")}
+            >
+              Drums
+            </button>
+
+            <button
+              className={activeTab === "lyrics" ? "active-tab" : ""}
+              onClick={() => setActiveTab("lyrics")}
+            >
+              Lyrics
+            </button>
+          </div>
+        </div>
 
         <button
-          className={activeTab === "samples" ? "active-tab" : ""}
-          onClick={() => setActiveTab("samples")}
+          className="new-song-btn"
+          onClick={() => setShowCreationModal(true)}
         >
-          Samples
-        </button>
-
-        <button
-          className={activeTab === "riffs" ? "active-tab" : ""}
-          onClick={() => setActiveTab("riffs")}
-        >
-          Riffs
-        </button>
-
-        <button
-          className={activeTab === "drums" ? "active-tab" : ""}
-          onClick={() => setActiveTab("drums")}
-        >
-          Drums
-        </button>
-
-        <button
-          className={activeTab === "lyrics" ? "active-tab" : ""}
-          onClick={() => setActiveTab("lyrics")}
-        >
-          Lyrics
+          + New {activeTab.slice(0, -1)}
         </button>
       </div>
 
       {/* CONTENT */}
 
       <div className="creations-content">
-        <div className="songs-toolbar">
-          <button
-            className="new-song-btn"
-            onClick={() => setShowCreationModal(true)}
-          >
-            + New {activeTab.slice(0, -1)}
-          </button>
-        </div>
-
         {filteredCreations.length > 0 ? (
           <CreationsGrid
             items={filteredCreations}

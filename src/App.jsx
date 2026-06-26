@@ -5,6 +5,7 @@ import Music from "./pages/Music";
 import FilmJournal from "./pages/FilmJournal";
 import MusicVideos from "./pages/MusicVideos";
 import MusicCreationsPage from "./pages/MusicCreationsPage.jsx";
+import MusicLearningPage from "./pages/MusicLearningPage.jsx";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route path="/film" element={<FilmJournal />} />
       <Route path="/music/videos" element={<MusicVideos />} />
       <Route path="/music/creations" element={<MusicCreationsPage />} />
+      <Route path="/music/learning" element={<MusicLearningPage />} />
     </Routes>
   );
 };
