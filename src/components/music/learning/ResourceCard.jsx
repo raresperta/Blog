@@ -118,28 +118,16 @@ function ResourceCard({ title, value, type, song, onSongUpdate }) {
             )}
 
             {type === "pdf" && (
-              <div className="pdf-preview">
-                <Document
-                  file={value}
-                  onLoadSuccess={() => console.log("PDF loaded")}
-                  onLoadError={(err) => {
-                    console.log("PDF LOAD ERROR");
-                    console.log(err);
-                  }}
-                  onSourceError={(err) => {
-                    console.log("PDF SOURCE ERROR");
-                    console.log(err);
-                  }}
-                >
-                  <Page
-                    pageNumber={1}
-                    width={260}
-                    renderTextLayer={false}
-                    renderAnnotationLayer={false}
-                  />
-                </Document>
-              </div>
-            )}
+  <div className="pdf-preview">
+    <iframe
+      src={value}
+      width="260"
+      height="350"
+      style={{ border: "none" }}
+      title="PDF preview"
+    />
+  </div>
+)}
           </div>
         ) : (
           <div className="resource-empty">+</div>
