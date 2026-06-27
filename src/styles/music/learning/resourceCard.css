@@ -40,6 +40,12 @@
   height: 100%;
   border: none;
 }
+.pdf-preview canvas {
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-height: 100%; /* Să nu depășească niciodată înălțimea cardului */
+  object-fit: contain;
+}
 
 .resource-empty {
   height: 145px;
