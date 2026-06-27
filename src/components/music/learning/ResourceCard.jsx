@@ -119,15 +119,12 @@ function ResourceCard({ title, value, type, song, onSongUpdate }) {
 
             {type === "pdf" && (
   <div className="pdf-preview">
-    <iframe
-      src={value}
-      width="260"
-      height="350"
-      style={{ border: "none" }}
-      title="PDF preview"
-    />
-  </div>
-)}
+    <object
+  data={value}
+  type="application/pdf"
+  width="100%"
+  height="400"
+/>
           </div>
         ) : (
           <div className="resource-empty">+</div>
