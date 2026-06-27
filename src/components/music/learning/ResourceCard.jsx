@@ -1,16 +1,13 @@
 import { useRef, useState } from "react";
 import axios from "axios";
 import { pdfjs, Page, Document } from "react-pdf";
-import workerSrc from "react-pdf/dist/pdf.worker.entry?url";
 
 import PdfViewerModal from "./PdfViewerModal";
 import ResourceLinkModal from "./ResourceLinkModal";
 
 import "../../../styles/music/learning/resourceCard.css";
 import { API_URL } from "../../../config";
-
-pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
-
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 function ResourceCard({ title, value, type, song, onSongUpdate }) {
   const fileInputRef = useRef(null);
   const [showPdfModal, setShowPdfModal] = useState(false);
