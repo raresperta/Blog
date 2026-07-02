@@ -69,22 +69,23 @@ function SongTimelineView({ songName, videos }) {
                 </button>
 
                 <div className={`month-content ${isOpen ? "open" : ""}`}>
-                  {Object.entries(monthDays).map(([day, dayVideos]) => (
-                    <div className="day-group" key={day}>
-                      <div className="day-label">{day}</div>
+                  <div className="videos-grid">
+                    {Object.entries(monthDays).flatMap(([day, dayVideos]) =>
+                      dayVideos.map((video, index) => (
+                        <div className="video-with-day" key={video.id}>
+                          {index === 0 && (
+                            <div className="floating-day-label">{day}</div>
+                          )}
 
-                      <div className="videos-grid">
-                        {dayVideos.map((video) => (
                           <VideoCard
-                            key={video.id}
                             video={video}
                             onOpenVideo={setSelectedVideo}
                             onEditVideo={setEditingVideo}
                           />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                        </div>
+                      )),
+                    )}
+                  </div>
                 </div>
               </div>
             );
@@ -124,14 +125,14 @@ function SongTimelineView({ songName, videos }) {
           onSave={(updatedVideo, action) => {
             if (action === "delete") {
               setLocalVideos((prev) =>
-                prev.filter((v) => v.id !== updatedVideo.id)
+                prev.filter((v) => v.id !== updatedVideo.id),
               );
               setEditingVideo(null);
               return;
             }
 
             setLocalVideos((prev) =>
-              prev.map((v) => (v.id === updatedVideo.id ? updatedVideo : v))
+              prev.map((v) => (v.id === updatedVideo.id ? updatedVideo : v)),
             );
 
             setEditingVideo(null);
