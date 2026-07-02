@@ -91,3 +91,45 @@
 
   margin-top: 20px;
 }
+@media (max-width: 768px) {
+  .card {
+    min-height: 190px;
+
+    padding: 20px 16px;
+
+    border-radius: 20px;
+  }
+
+  .cardGlow {
+    width: 140px;
+    height: 140px;
+
+    top: -50px;
+    right: -50px;
+  }
+
+  .icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .card p {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .card span {
+    font-size: 11px;
+    margin-top: 14px;
+  }
+
+  .card:hover {
+    transform: none; /* hover irrelevant pe iPhone */
+  }
+}

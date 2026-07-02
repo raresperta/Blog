@@ -71,3 +71,19 @@ h2 {
 section {
   margin-bottom: 80px;
 }
+@media (max-width: 768px) {
+  body {
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+
+  h2 {
+    margin-bottom: 18px;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  section {
+    margin-bottom: 48px;
+  }
+}

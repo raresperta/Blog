@@ -16,16 +16,27 @@ function SongTimelineView({ songName, videos }) {
   const groupedByMonth = {};
 
   localVideos.forEach((video) => {
-    const month = new Date(video.date).toLocaleString("en-US", {
+    const date = new Date(video.date);
+
+    const month = date.toLocaleString("en-US", {
       month: "long",
       year: "numeric",
     });
 
+    const day = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+
     if (!groupedByMonth[month]) {
-      groupedByMonth[month] = [];
+      groupedByMonth[month] = {};
     }
 
-    groupedByMonth[month].push(video);
+    if (!groupedByMonth[month][day]) {
+      groupedByMonth[month][day] = [];
+    }
+
+    groupedByMonth[month][day].push(video);
   });
 
   const currentMonth = Object.keys(groupedByMonth)[0];
@@ -45,14 +56,11 @@ function SongTimelineView({ songName, videos }) {
     <>
       <div className="song-timeline-page">
         <div className="timeline-wrapper">
-          {Object.entries(groupedByMonth).map(([month, monthVideos]) => {
+          {Object.entries(groupedByMonth).map(([month, monthDays]) => {
             const isOpen = openMonths[month];
 
             return (
-              <div
-                className={`month-group ${isOpen ? "open" : "collapsed"}`}
-                key={month}
-              >
+              <div className="month-group" key={month}>
                 <button
                   className="month-header"
                   onClick={() => toggleMonth(month)}
@@ -61,29 +69,28 @@ function SongTimelineView({ songName, videos }) {
                 </button>
 
                 <div className={`month-content ${isOpen ? "open" : ""}`}>
-                  <div className="videos-grid">
-                    {monthVideos.map((video) => (
-                      <VideoCard
-                        key={video.id}
-                        video={video}
-                        onOpenVideo={(video) => {
-                          setSelectedVideo(video);
-                        }}
-                        onEditVideo={(video) => {
-                          setEditingVideo(video);
-                        }}
-                        className={video.isBestTake ? "the-one" : ""}
-                      />
-                    ))}
-                  </div>
+                  {Object.entries(monthDays).map(([day, dayVideos]) => (
+                    <div className="day-group" key={day}>
+                      <div className="day-label">{day}</div>
+
+                      <div className="videos-grid">
+                        {dayVideos.map((video) => (
+                          <VideoCard
+                            key={video.id}
+                            video={video}
+                            onOpenVideo={setSelectedVideo}
+                            onEditVideo={setEditingVideo}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             );
           })}
         </div>
       </div>
-
-      {/* VIDEO PLAYER */}
 
       {selectedVideo && (
         <div
@@ -110,8 +117,6 @@ function SongTimelineView({ songName, videos }) {
         </div>
       )}
 
-      {/* EDIT MODAL */}
-
       {editingVideo && (
         <EditVideoModal
           video={editingVideo}
@@ -119,15 +124,14 @@ function SongTimelineView({ songName, videos }) {
           onSave={(updatedVideo, action) => {
             if (action === "delete") {
               setLocalVideos((prev) =>
-                prev.filter((v) => v.id !== updatedVideo.id),
+                prev.filter((v) => v.id !== updatedVideo.id)
               );
-
               setEditingVideo(null);
               return;
             }
 
             setLocalVideos((prev) =>
-              prev.map((v) => (v.id === updatedVideo.id ? updatedVideo : v)),
+              prev.map((v) => (v.id === updatedVideo.id ? updatedVideo : v))
             );
 
             setEditingVideo(null);

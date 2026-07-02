@@ -344,3 +344,142 @@
 
   font-size: 13px;
 }
+@media (max-width: 768px) {
+  .music-page {
+    min-height: 100svh;
+    padding: 12px 14px 28px;
+    overflow-x: hidden;
+  }
+
+  /* NAVBAR */
+
+  .music-navbar {
+    margin-bottom: 16px;
+    height: auto;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .music-logo {
+    font-size: 18px;
+  }
+
+  .music-nav-links {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .music-nav-links a {
+    font-size: 13px;
+  }
+
+  /* HERO */
+
+  .music-hero-main {
+    grid-template-columns: 1fr;
+    gap: 18px;
+
+    padding: 20px 18px;
+    border-radius: 22px;
+    margin-bottom: 16px;
+  }
+
+  .music-hero-left h1 {
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .music-subtitle {
+    font-size: 14px;
+  }
+
+  .music-hero-right img {
+    height: 180px;
+    border-radius: 18px;
+  }
+
+  .music-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .music-primary-btn,
+  .music-secondary-btn {
+    width: 100%;
+    height: 48px;
+    font-size: 14px;
+  }
+
+  /* GRID */
+
+  .music-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  /* CARDS */
+
+  .music-card {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .card-header {
+    margin-bottom: 14px;
+  }
+
+  .card-header h3 {
+    font-size: 15px;
+  }
+
+  .card-header span {
+    font-size: 13px;
+  }
+
+  /* SONGS */
+
+  .song-item {
+    padding: 10px;
+  }
+
+  .song-item h4 {
+    font-size: 14px;
+  }
+
+  .song-item p {
+    font-size: 12px;
+  }
+
+  .song-item button {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  /* VIDEOS */
+
+  .video-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .video-card img {
+    height: 100px;
+    border-radius: 12px;
+  }
+
+  /* TUTORIALS */
+
+  .tutorial-item img {
+    width: 72px;
+    height: 48px;
+  }
+
+  .tutorial-item h4 {
+    font-size: 14px;
+  }
+
+  .tutorial-item p {
+    font-size: 12px;
+  }
+}

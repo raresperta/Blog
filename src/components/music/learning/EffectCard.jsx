@@ -11,13 +11,23 @@ function EffectCard({ pedal, onToggle, onModelChange, onKnobChange }) {
     e.preventDefault();
 
     const startY = e.clientY;
-    const startValue = knob.value;
+    const startValue = Number(knob.value);
+
+    const min = knob.min ?? 0;
+    const max = knob.max ?? 100;
 
     function onMove(moveEvent) {
       const diff = startY - moveEvent.clientY;
 
-      let newValue = startValue + diff * 0.4;
-      newValue = Math.max(0, Math.min(100, Math.round(newValue)));
+      const range = max - min;
+
+      let newValue = startValue + diff * (range / 250);
+
+      newValue = Math.max(min, Math.min(max, newValue));
+
+      if (Number.isInteger(min) && Number.isInteger(max)) {
+        newValue = Math.round(newValue);
+      }
 
       onKnobChange(pedal.title, knob.label, newValue);
     }
@@ -42,10 +52,7 @@ function EffectCard({ pedal, onToggle, onModelChange, onKnobChange }) {
         />
       </div>
 
-      <div
-        className="effect-model"
-        onClick={() => setShowModels(!showModels)}
-      >
+      <div className="effect-model" onClick={() => setShowModels(!showModels)}>
         {pedal.model}
       </div>
 
@@ -69,17 +76,12 @@ function EffectCard({ pedal, onToggle, onModelChange, onKnobChange }) {
       <div className="knobs-row">
         {dialKnobs.map((knob) => (
           <div key={knob.label} className="knob-block">
-            <div
-              className="knob"
-              onMouseDown={(e) => startKnobDrag(e, knob)}
-            >
+            <div className="knob" onMouseDown={(e) => startKnobDrag(e, knob)}>
               <div
                 className="knob-indicator"
                 style={{
                   transform: `rotate(${
-                    ((knob.value - knob.min) /
-                      (knob.max - knob.min)) *
-                      270 -
+                    ((knob.value - knob.min) / (knob.max - knob.min)) * 270 -
                     135
                   }deg)`,
                 }}
@@ -107,11 +109,7 @@ function EffectCard({ pedal, onToggle, onModelChange, onKnobChange }) {
                   className="knob-select"
                   value={knob.value}
                   onChange={(e) =>
-                    onKnobChange(
-                      pedal.title,
-                      knob.label,
-                      e.target.value
-                    )
+                    onKnobChange(pedal.title, knob.label, e.target.value)
                   }
                 >
                   {knob.options.map((opt) => (
