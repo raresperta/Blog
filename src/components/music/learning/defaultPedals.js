@@ -169,7 +169,7 @@ const defaultPedals = [
         options: ["SM57", "MD421", "MD441", "R121", "C414"],
         value: "MD441",
       },
-      { label: "CENTER", type: "dial", min: 0, max: 10, step: 1, value: 5 },
+      { label: "CENTER", type: "dial", min: 0, max: 100, step: 1, value: 5 },
       { label: "DISTANCE", type: "dial", min: 0, max: 100, step: 1, value: 25 },
     ],
   },
